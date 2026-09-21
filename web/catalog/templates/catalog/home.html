@@ -1,0 +1,24 @@
+{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% block content %}
+<h1>{% trans "Pindah dari Windows ke Linux?" %}</h1>
+<p>{% blocktrans count n=stats.apps %}{{ n }} aplikasi Linux terdata.{% plural %}{{ n }} aplikasi Linux terdata.{% endblocktrans %}
+{% trans "Cari padanan aplikasi Windows favoritmu." %}</p>
+
+{% if q and results %}
+<h2>{% trans "Hasil cepat" %}</h2>
+<div class="grid-cards">
+{% for a in results %}<div class="card"><a href="{% url 'app-detail' a.slug %}"><strong>{{ a.display_name }}</strong></a></div>{% endfor %}
+</div>
+{% endif %}
+
+<h2>{% trans "Jelajahi per kategori" %}</h2>
+<div class="grid-cards">
+{% for c in cats %}{% if c.n %}<div class="card"><a href="{% url 'category-detail' c.slug %}"><strong>{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</strong></a><br><small>{{ c.n }} {% trans "aplikasi" %}</small></div>{% endif %}{% endfor %}
+</div>
+
+<h2>Windows → Linux</h2>
+<ul>
+{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}
+</ul>
+<p><a href="{% url 'windows-list' %}">{% trans "Lihat semua aplikasi Windows…" %}</a></p>
+{% endblock %}

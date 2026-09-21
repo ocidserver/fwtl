@@ -1,0 +1,18 @@
+{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% block title %}{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}</h1>
+{% if wins %}
+<h2>{% trans "Aplikasi Windows di kategori ini" %}</h2>
+<ul>{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}</ul>
+{% endif %}
+<h2>{% trans "Aplikasi Linux" %}</h2>
+<div class="grid-cards">
+{% for a in page %}<div class="card"><a href="{% url 'app-detail' a.slug %}"><strong>{{ a.display_name }}</strong></a></div>{% empty %}<p>{% trans "Belum ada." %}</p>{% endfor %}
+</div>
+{% if page.has_other_pages %}<p>
+{% if page.has_previous %}<a href="?page={{ page.previous_page_number }}">←</a>{% endif %}
+{{ page.number }} / {{ page.paginator.num_pages }}
+{% if page.has_next %}<a href="?page={{ page.next_page_number }}">→</a>{% endif %}
+</p>{% endif %}
+{% endblock %}

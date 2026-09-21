@@ -1,0 +1,15 @@
+{% extends "catalog/base.html" %}{% load i18n %}
+{% block title %}Windows → Linux — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>Windows → Linux</h1>
+<p>{% trans "Pilih aplikasi Windows untuk melihat pengganti Linux-nya." %}</p>
+<form method="get" role="search"><input type="search" name="q" value="{{ q }}" placeholder="Photoshop…"></form>
+<ul>
+{% for w in page %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a> <small>({{ w.n }} {% trans "alternatif" %})</small></li>{% empty %}<li>{% trans "Tidak ditemukan." %}</li>{% endfor %}
+</ul>
+{% if page.has_other_pages %}<p>
+{% if page.has_previous %}<a href="?q={{ q }}&page={{ page.previous_page_number }}">←</a>{% endif %}
+{{ page.number }} / {{ page.paginator.num_pages }}
+{% if page.has_next %}<a href="?q={{ q }}&page={{ page.next_page_number }}">→</a>{% endif %}
+</p>{% endif %}
+{% endblock %}

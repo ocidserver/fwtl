@@ -1,0 +1,16 @@
+{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% block title %}{{ win.name }} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>{{ win.name }}</h1>
+{% if win.category %}<p>{% trans "Kategori" %}: <a href="{% url 'category-detail' win.category.slug %}">{% if LANG == "id" %}{{ win.category.name_id }}{% else %}{{ win.category.name_en }}{% endif %}</a></p>{% endif %}
+<h2>{% trans "Pengganti di Linux" %}</h2>
+{% for alt in alts %}
+<article>
+<h3><a href="{% url 'app-detail' alt.app.slug %}">{{ alt.app.display_name }}</a> — <span class="compat">{{ alt.compatibility }}%</span></h3>
+<p>{% if LANG == "id" %}{{ alt.notes_id }}{% else %}{{ alt.notes_en }}{% endif %}</p>
+{% if alt.install_cachyos %}<code class="install">{{ alt.install_cachyos }}</code>{% endif %}
+{% if alt.install_aur %}<code class="install">{{ alt.install_aur }}</code>{% endif %}
+{% if alt.install_flathub %}<code class="install">{{ alt.install_flathub }}</code>{% endif %}
+</article>
+{% empty %}<p>{% trans "Belum ada alternatif terkurasi." %}</p>{% endfor %}
+{% endblock %}

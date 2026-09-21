@@ -1,0 +1,19 @@
+{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% block title %}{{ app.display_name }} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>{{ app.display_name }}</h1>
+<p>{% for c in app.categories.all %}<a href="{% url 'category-detail' c.slug %}">{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+{% if desc %}<p>{{ desc|truncatewords:60 }}</p>{% endif %}
+
+<h2>{% trans "Paket per sumber" %}</h2>
+<ul>
+{% for p in pkgs %}<li><strong>{{ p.source }}</strong>: <code>{{ p.name }}</code>{% if p.version %} ({{ p.version }}){% endif %}{% if p.repository %} [{{ p.repository }}]{% endif %}</li>{% endfor %}
+</ul>
+
+{% if alts %}
+<h2>{% trans "Pengganti untuk aplikasi Windows" %}</h2>
+<ul>
+{% for alt in alts %}<li><a href="{% url 'windows-detail' alt.windows_app.slug %}">{{ alt.windows_app.name }}</a> — <span class="compat">{{ alt.compatibility }}%</span></li>{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

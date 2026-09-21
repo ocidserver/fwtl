@@ -1,23 +1,45 @@
-"""
-URL configuration for config project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path
+from django.contrib.sitemaps import Sitemap
+from django.contrib.sitemaps.views import sitemap
+from django.urls import include, path, reverse
+from catalog.models import App
+
+
+class AppSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.7
+
+    def items(self):
+        return App.objects.filter(is_gui=True).only("slug")
+
+    def location(self, obj):
+        return f"/app/{obj.slug}/"
+
+
+class StaticSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.9
+
+    def items(self):
+        return ["home", "app-list", "category-list", "windows-list"]
+
+    def location(self, obj):
+        return reverse(obj)
+
+
+sitemaps = {
+    "apps": AppSitemap,
+    "static": StaticSitemap,
+}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
 ]
+
+urlpatterns += i18n_patterns(
+    path("", include("catalog.urls")),
+    prefix_default_language=False,
+)

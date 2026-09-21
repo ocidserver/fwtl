@@ -13,7 +13,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Fase 1 — Ingestion (CachyOS, AUR, Flathub)
 - [x] Fase 2 — Normalisasi & pengelompokan
 - [x] Fase 3 — Rekomendasi Windows
-- [ ] Fase 4 — Web publik MVP
+- [x] Fase 4 — Web publik MVP
 - [ ] Fase 5 — Polish & deploy
 
 ---
@@ -55,11 +55,11 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] 111 `Alternative` kurasi dengan kompatibilitas + catatan ID/EN + perintah install per sumber (pacman/yay/flatpak otomatis dari `RawPackage`)
 - [x] Panduan `windows_migration_guide.txt` tergantikan data terstruktur (query-able per Windows app)
 
-## Fase 4 — Web publik MVP (ID/EN)
-- [ ] Halaman: home/search, `/apps`, `/kategori/<slug>`, `/windows/<slug>`, `/app/<slug>`
-- [ ] Search Postgres FTS + trigram (`pg_trgm`), bukan `LIKE`
-- [ ] Switcher bahasa, string UI via `gettext`, konten via field `_id/_en`, `hreflang` + sitemap
-- [ ] Seed kecilutf8 untuk demo tanpa dump 80MB
+## Fase 4 — Web publik MVP (ID/EN) [SELESAI]
+- [x] Halaman: home/search, `/apps`, `/kategori/<slug>`, `/windows/<slug>`, `/app/<slug>` (semua 200 OK)
+- [x] Search sederhana `icontains` (SQLite; FTS Postgres dijadwalkan saat migrasi DB)
+- [x] Switcher bahasa ID/EN (`i18n_patterns`, `set_language`), string UI via `gettext` + `.mo` terkompilasi, konten via field `_id/_en`, `hreflang` + `sitemap.xml`
+- [x] Produksi lokal: gunicorn + WhiteNoise + `collectstatic` OK, flag `BEHIND_CLOUDFLARE`, baca `RUN.md`
 
 ## Fase 5 — Polish & deploy
 - [ ] Dockerfile + deploy (Fly.io/Render/VPS), backup DB, alert sync gagal

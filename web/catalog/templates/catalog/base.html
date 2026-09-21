@@ -1,0 +1,40 @@
+{% load i18n %}{% get_current_language as LANG %}<!DOCTYPE html>
+<html lang="{{ LANG }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% trans "Migrasi Windows ke Linux" %}{% endblock %}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+{% if LANG == "en" %}
+<link rel="alternate" hreflang="id" href="{{ request.path|slice:'3:' }}">
+<link rel="alternate" hreflang="en" href="{{ request.path }}">
+{% else %}
+<link rel="alternate" hreflang="id" href="{{ request.path }}">
+<link rel="alternate" hreflang="en" href="/en{{ request.path }}">
+{% endif %}
+<style>main{max-width:1100px;margin:0 auto;padding:1rem} .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem} .card{border:1px solid var(--muted-border-color);border-radius:.5rem;padding:.75rem} .compat{font-weight:bold} nav ul.lang{display:flex;gap:.5rem;list-style:none;margin:0;padding:0} code.install{display:block;white-space:pre-wrap;font-size:.8em}</style>
+</head>
+<body>
+<main>
+<nav>
+<ul><li><strong><a href="/">{% trans "MigrasiLinux" %}</a></strong></li></ul>
+<ul>
+<li><a href="{% url 'app-list' %}">{% trans "Aplikasi" %}</a></li>
+<li><a href="{% url 'category-list' %}">{% trans "Kategori" %}</a></li>
+<li><a href="{% url 'windows-list' %}">Windows → Linux</a></li>
+<li><form action="{% url 'set_language' %}" method="post" style="margin:0">{% csrf_token %}
+<input type="hidden" name="next" value="{{ request.path }}">
+<select name="language" onchange="this.form.submit()">
+<option value="id" {% if LANG == "id" %}selected{% endif %}>ID</option>
+<option value="en" {% if LANG == "en" %}selected{% endif %}>EN</option>
+</select></form></li>
+</ul>
+</nav>
+<form action="{% url 'app-list' %}" method="get" role="search">
+<input type="search" name="q" value="{{ q|default:'' }}" placeholder="{% trans 'Cari aplikasi…' %}">
+</form>
+{% block content %}{% endblock %}
+<hr><small>{% trans "Data dari CachyOS, AUR, dan Flathub." %}</small>
+</main>
+</body>
+</html>
