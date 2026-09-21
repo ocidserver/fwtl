@@ -9,4 +9,6 @@ urlpatterns = [
     path("kategori/<slug:slug>/", views.category_detail, name="category-detail"),
     path("windows/", views.windows_list, name="windows-list"),
     path("windows/<slug:slug>/", views.windows_detail, name="windows-detail"),
+    path("top/", views.top_list, name="top-list"),
+    path("docs/<slug:slug>/", views.doc_page, name="doc-page"),
 ]

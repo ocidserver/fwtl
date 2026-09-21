@@ -22,15 +22,27 @@ class StaticSitemap(Sitemap):
     priority = 0.9
 
     def items(self):
-        return ["home", "app-list", "category-list", "windows-list"]
+        return ["home", "app-list", "category-list", "windows-list", "top-list"]
 
     def location(self, obj):
         return reverse(obj)
 
 
+class DocSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.6
+
+    def items(self):
+        return ["install", "migrasi", "sumber-data", "faq"]
+
+    def location(self, obj):
+        return reverse("doc-page", args=[obj])
+
+
 sitemaps = {
     "apps": AppSitemap,
     "static": StaticSitemap,
+    "docs": DocSitemap,
 }
 
 urlpatterns = [

@@ -1,0 +1,14 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}{% trans "Cara Install" %} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>📦 {% trans "Cara Install" %}</h1>
+<h2>CachyOS / Arch (pacman)</h2>
+<code class="install">sudo pacman -S firefox
+sudo pacman -Syu   # update sistem</code>
+<h2>AUR (yay)</h2>
+<code class="install">yay -S visual-studio-code-bin</code>
+<h2>Flatpak / Flathub</h2>
+<code class="install">flatpak install flathub org.mozilla.firefox
+flatpak update     # update semua</code>
+<p>{% trans "Setiap halaman aplikasi menampilkan perintah install yang tepat untuk ketiga sumber di atas." %}</p>
+{% endblock %}

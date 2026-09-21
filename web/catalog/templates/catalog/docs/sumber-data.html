@@ -1,0 +1,11 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}{% trans "Sumber Data" %} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>🗄️ {% trans "Sumber Data" %}</h1>
+<ul>
+<li><strong>CachyOS</strong> — packages.cachyos.org (nama, versi, repo, arsitektur, tanggal build).</li>
+<li><strong>AUR</strong> — aur.archlinux.org (votes, popularity, maintainer, lisensi, dependensi).</li>
+<li><strong>Flathub</strong> — flathub.org (deskripsi, developer, ikon, total unduhan).</li>
+</ul>
+<p>{% trans "Data disinkronisasi berkala. Votes dan popularity berasal dari komunitas AUR; total unduhan dari statistik Flathub." %}</p>
+{% endblock %}

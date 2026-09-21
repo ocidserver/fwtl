@@ -1,0 +1,25 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}{% trans "Top Apps" %} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>🏆 {% trans "Top Apps" %}</h1>
+
+<h2>👍 {% trans "AUR teratas berdasar votes" %}</h2>
+<ol>
+{% for p in votes %}<li>{% if p.app %}<a href="{% url 'app-detail' p.app.slug %}">{{ p.app.display_name }}</a>{% else %}<code>{{ p.name }}</code>{% endif %} — {{ p.extra.votes }} votes</li>{% endfor %}
+</ol>
+
+<h2>🔥 {% trans "AUR teratas berdasar popularity" %}</h2>
+<ol>
+{% for p in pop %}<li>{% if p.app %}<a href="{% url 'app-detail' p.app.slug %}">{{ p.app.display_name }}</a>{% else %}<code>{{ p.name }}</code>{% endif %} — {{ p.extra.popularity|floatformat:1 }}</li>{% endfor %}
+</ol>
+
+<h2>⬇️ {% trans "Flathub teratas berdasar unduhan" %}</h2>
+{% if dls %}<ol>
+{% for p in dls %}<li>{% if p.app %}<a href="{% url 'app-detail' p.app.slug %}">{{ p.app.display_name }}</a>{% else %}<code>{{ p.name }}</code>{% endif %} — {{ p.extra.downloads }} {% trans "unduhan" %}</li>{% endfor %}
+</ol>{% else %}<p>{% trans "Data unduhan sedang dikumpulkan." %}</p>{% endif %}
+
+<h2>🔁 {% trans "Paling sering jadi pengganti Windows" %}</h2>
+<ol>
+{% for a in replaced %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a> — {{ a.n }} Windows app</li>{% endfor %}
+</ol>
+{% endblock %}

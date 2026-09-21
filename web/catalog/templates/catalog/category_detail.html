@@ -1,4 +1,4 @@
-{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %} — {{ block.super }}{% endblock %}
 {% block content %}
 <h1>{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}</h1>

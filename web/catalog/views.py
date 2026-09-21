@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import get_language
-from .models import Alternative, App, Category, WindowsApp
+from .models import Alternative, App, Category, RawPackage, WindowsApp
 
 
 def _lang():
@@ -53,15 +53,31 @@ def app_list(request):
 def app_detail(request, slug):
     lang = _lang()
     app = get_object_or_404(App.objects.prefetch_related("categories", "packages"), slug=slug)
-    pkgs = app.packages.all().order_by("source", "name")
+    pkgs = list(app.packages.all().order_by("source", "name"))
     alts = app.alternatives_for_windows.select_related("windows_app").order_by("-compatibility")
-    desc = ""
+    info = {"cachyos": [], "aur": None, "flathub": None, "desc": "", "votes": 0,
+            "popularity": 0.0, "downloads": 0, "maintainer": "", "licenses": [],
+            "homepage": "", "icon": "", "developer": ""}
     for p in pkgs:
-        if p.description:
-            desc = p.description
-            break
+        ex = p.extra or {}
+        if p.description and not info["desc"]:
+            info["desc"] = p.description
+        if p.source == "cachyos":
+            info["cachyos"].append(p)
+        elif p.source == "aur" and info["aur"] is None:
+            info["aur"] = p
+            info["votes"] = ex.get("votes", 0) or 0
+            info["popularity"] = round(ex.get("popularity", 0) or 0, 2)
+            info["maintainer"] = ex.get("maintainer", "")
+            info["licenses"] = ex.get("license", []) or []
+        elif p.source == "flathub" and info["flathub"] is None:
+            info["flathub"] = p
+            info["downloads"] = ex.get("downloads", 0) or 0
+            info["homepage"] = ex.get("homepage", "")
+            info["icon"] = ex.get("icon", "")
+            info["developer"] = ex.get("display_name") and ex.get("developer", "") or ex.get("developer", "")
     return render(request, "catalog/app_detail.html",
-                  {"app": app, "pkgs": pkgs, "alts": alts, "desc": desc})
+                  {"app": app, "pkgs": pkgs, "alts": alts, **info})
 
 
 def category_list(request):
@@ -97,3 +113,27 @@ def windows_detail(request, slug):
             .prefetch_related("app__categories", "app__packages")
             .order_by("-compatibility"))
     return render(request, "catalog/windows_detail.html", {"win": win, "alts": alts})
+
+
+def top_list(request):
+    votes = (RawPackage.objects.filter(source="aur", extra__votes__gt=0)
+             .select_related("app").order_by("-extra__votes")[:20])
+    pop = (RawPackage.objects.filter(source="aur", extra__popularity__gt=0)
+           .select_related("app").order_by("-extra__popularity")[:20])
+    dls = (RawPackage.objects.filter(source="flathub", extra__downloads__gt=0)
+           .select_related("app").order_by("-extra__downloads")[:20])
+    replaced = (App.objects.filter(is_gui=True)
+                .annotate(n=Count("alternatives_for_windows"))
+                .filter(n__gt=0).order_by("-n")[:20])
+    return render(request, "catalog/top_list.html",
+                  {"votes": votes, "pop": pop, "dls": dls, "replaced": replaced})
+
+
+DOC_PAGES = ["install", "migrasi", "sumber-data", "faq"]
+
+
+def doc_page(request, slug):
+    if slug not in DOC_PAGES:
+        from django.http import Http404
+        raise Http404
+    return render(request, f"catalog/docs/{slug}.html", {"doc_slug": slug})

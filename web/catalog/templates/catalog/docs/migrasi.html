@@ -1,0 +1,13 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}{% trans "Panduan Migrasi" %} — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>🐧 {% trans "Panduan Migrasi Windows ke Linux" %}</h1>
+<ol>
+<li>{% trans "Cari aplikasi Windows-mu di menu Windows → Linux." %}</li>
+<li>{% trans "Bandingkan skor kompatibilitas tiap alternatif." %}</li>
+<li>{% trans "Install via perintah yang tertera (pacman / yay / flatpak)." %}</li>
+<li>{% trans "Untuk gim Windows: install Steam lalu aktifkan Proton." %}</li>
+<li>{% trans "Format umum (docx, xlsx, pdf, mp3, mp4) kompatibel langsung." %}</li>
+<li>{% trans "Kebanyakan alternatif bersifat gratis dan open-source." %}</li>
+</ol>
+{% endblock %}

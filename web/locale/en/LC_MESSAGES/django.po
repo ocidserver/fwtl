@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 15:13+0700\n"
+"POT-Creation-Date: 2026-09-21 15:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: catalog/templates/catalog/app_detail.html:8
+msgid "Rating & statistik"
+msgstr "Rating & statistics"
+
+#: catalog/templates/catalog/app_detail.html:12
+msgid "Unduhan Flathub"
+msgstr "Flathub downloads"
+
+#: catalog/templates/catalog/app_detail.html:14
+msgid "Lisensi"
+msgstr "License"
+
+#: catalog/templates/catalog/app_detail.html:19
+msgid "Cara install"
+msgstr "How to install"
+
+#: catalog/templates/catalog/app_detail.html:24
 msgid "Paket per sumber"
 msgstr "Packages per source"
 
-#: catalog/templates/catalog/app_detail.html:14
+#: catalog/templates/catalog/app_detail.html:26
+msgid "Sumber"
+msgstr "Source"
+
+#: catalog/templates/catalog/app_detail.html:26
+msgid "Nama"
+msgstr "Name"
+
+#: catalog/templates/catalog/app_detail.html:26
+msgid "Versi"
+msgstr "Version"
+
+#: catalog/templates/catalog/app_detail.html:31
 msgid "Pengganti untuk aplikasi Windows"
 msgstr "Replacements for Windows apps"
 
@@ -34,6 +62,7 @@ msgstr "Apps"
 
 #: catalog/templates/catalog/app_list.html:6
 #: catalog/templates/catalog/base.html:34
+#: catalog/templates/catalog/base_docs.html:75
 msgid "Cari aplikasi…"
 msgstr "Search apps…"
 
@@ -47,14 +76,17 @@ msgid "Tidak ditemukan."
 msgstr "Not found."
 
 #: catalog/templates/catalog/base.html:6
+#: catalog/templates/catalog/base_docs.html:6
 msgid "Migrasi Windows ke Linux"
 msgstr "Migrate from Windows to Linux"
 
 #: catalog/templates/catalog/base.html:20
+#: catalog/templates/catalog/base_docs.html:48
 msgid "MigrasiLinux"
 msgstr "MigrasiLinux"
 
 #: catalog/templates/catalog/base.html:23
+#: catalog/templates/catalog/base_docs.html:56
 #: catalog/templates/catalog/category_list.html:2
 #: catalog/templates/catalog/category_list.html:4
 #: catalog/templates/catalog/windows_detail.html:5
@@ -62,8 +94,37 @@ msgid "Kategori"
 msgstr "Categories"
 
 #: catalog/templates/catalog/base.html:37
+#: catalog/templates/catalog/base_docs.html:79
 msgid "Data dari CachyOS, AUR, dan Flathub."
 msgstr "Data from CachyOS, AUR, and Flathub."
+
+#: catalog/templates/catalog/base_docs.html:49
+msgid "Jelajah"
+msgstr "Explore"
+
+#: catalog/templates/catalog/base_docs.html:51
+msgid "Beranda"
+msgstr "Home"
+
+#: catalog/templates/catalog/base_docs.html:52
+#: catalog/templates/catalog/top_list.html:2
+#: catalog/templates/catalog/top_list.html:4
+msgid "Top Apps"
+msgstr "Top Apps"
+
+#: catalog/templates/catalog/base_docs.html:53
+#, fuzzy
+#| msgid "Aplikasi"
+msgid "Semua Aplikasi"
+msgstr "Apps"
+
+#: catalog/templates/catalog/base_docs.html:60
+msgid "Dokumentasi"
+msgstr "Documentation"
+
+#: catalog/templates/catalog/base_docs.html:64
+msgid "Bahasa"
+msgstr "Language"
 
 #: catalog/templates/catalog/category_detail.html:6
 msgid "Aplikasi Windows di kategori ini"
@@ -81,6 +142,102 @@ msgstr "None yet."
 #: catalog/templates/catalog/home.html:16
 msgid "aplikasi"
 msgstr "apps"
+
+#: catalog/templates/catalog/docs/faq.html:5
+#, fuzzy
+#| msgid "Lihat semua aplikasi Windows…"
+msgid "Apakah semua aplikasi gratis?"
+msgstr "See all Windows apps…"
+
+#: catalog/templates/catalog/docs/faq.html:6
+msgid ""
+"Sebagian besar alternatif bersifat gratis dan open-source. Sebagian kecil "
+"(misal DaVinci Resolve, Dropbox) memiliki versi proprietary dengan akun."
+msgstr ""
+
+#: catalog/templates/catalog/docs/faq.html:7
+msgid "Apa arti skor kompatibilitas?"
+msgstr "What does the compatibility score mean?"
+
+#: catalog/templates/catalog/docs/faq.html:8
+msgid ""
+"Estimasi kurasi 0–100 seberapa baik alternatif menggantikan aplikasi "
+"Windows, dari kecocokan fitur dan format file."
+msgstr ""
+
+#: catalog/templates/catalog/docs/faq.html:9
+msgid "Bisakah aplikasi Windows dijalankan langsung?"
+msgstr "Can Windows apps run directly?"
+
+#: catalog/templates/catalog/docs/faq.html:10
+msgid ""
+"Ya, sebagian via Wine/Proton (Steam, Lutris, Bottles). Cek halaman gim untuk "
+"detailnya."
+msgstr ""
+
+#: catalog/templates/catalog/docs/faq.html:11
+msgid "Data diperbarui kapan?"
+msgstr "When is data updated?"
+
+#: catalog/templates/catalog/docs/faq.html:12
+msgid "Sinkronisasi sumber dijalankan berkala; lihat halaman Sumber Data."
+msgstr "Sources are synced periodically; see Data Sources."
+
+#: catalog/templates/catalog/docs/install.html:2
+#: catalog/templates/catalog/docs/install.html:4
+msgid "Cara Install"
+msgstr "Installation"
+
+#: catalog/templates/catalog/docs/install.html:13
+msgid ""
+"Setiap halaman aplikasi menampilkan perintah install yang tepat untuk ketiga "
+"sumber di atas."
+msgstr ""
+
+#: catalog/templates/catalog/docs/migrasi.html:2
+msgid "Panduan Migrasi"
+msgstr "Migration Guide"
+
+#: catalog/templates/catalog/docs/migrasi.html:4
+#, fuzzy
+#| msgid "Migrasi Windows ke Linux"
+msgid "Panduan Migrasi Windows ke Linux"
+msgstr "Migrate from Windows to Linux"
+
+#: catalog/templates/catalog/docs/migrasi.html:6
+msgid "Cari aplikasi Windows-mu di menu Windows → Linux."
+msgstr "Find your Windows app in the Windows → Linux menu."
+
+#: catalog/templates/catalog/docs/migrasi.html:7
+msgid "Bandingkan skor kompatibilitas tiap alternatif."
+msgstr "Compare each alternative's compatibility score."
+
+#: catalog/templates/catalog/docs/migrasi.html:8
+msgid "Install via perintah yang tertera (pacman / yay / flatpak)."
+msgstr "Install via the listed command (pacman / yay / flatpak)."
+
+#: catalog/templates/catalog/docs/migrasi.html:9
+msgid "Untuk gim Windows: install Steam lalu aktifkan Proton."
+msgstr "For Windows games: install Steam and enable Proton."
+
+#: catalog/templates/catalog/docs/migrasi.html:10
+msgid "Format umum (docx, xlsx, pdf, mp3, mp4) kompatibel langsung."
+msgstr "Common formats (docx, xlsx, pdf, mp3, mp4) work directly."
+
+#: catalog/templates/catalog/docs/migrasi.html:11
+msgid "Kebanyakan alternatif bersifat gratis dan open-source."
+msgstr "Most alternatives are free and open-source."
+
+#: catalog/templates/catalog/docs/sumber-data.html:2
+#: catalog/templates/catalog/docs/sumber-data.html:4
+msgid "Sumber Data"
+msgstr "Data Sources"
+
+#: catalog/templates/catalog/docs/sumber-data.html:10
+msgid ""
+"Data disinkronisasi berkala. Votes dan popularity berasal dari komunitas "
+"AUR; total unduhan dari statistik Flathub."
+msgstr ""
 
 #: catalog/templates/catalog/home.html:3
 msgid "Pindah dari Windows ke Linux?"
@@ -108,6 +265,30 @@ msgstr "Browse by category"
 #: catalog/templates/catalog/home.html:23
 msgid "Lihat semua aplikasi Windows…"
 msgstr "See all Windows apps…"
+
+#: catalog/templates/catalog/top_list.html:6
+msgid "AUR teratas berdasar votes"
+msgstr "Top AUR by votes"
+
+#: catalog/templates/catalog/top_list.html:11
+msgid "AUR teratas berdasar popularity"
+msgstr "Top AUR by popularity"
+
+#: catalog/templates/catalog/top_list.html:16
+msgid "Flathub teratas berdasar unduhan"
+msgstr "Top Flathub by downloads"
+
+#: catalog/templates/catalog/top_list.html:18
+msgid "unduhan"
+msgstr "downloads"
+
+#: catalog/templates/catalog/top_list.html:19
+msgid "Data unduhan sedang dikumpulkan."
+msgstr "Download data is being collected."
+
+#: catalog/templates/catalog/top_list.html:21
+msgid "Paling sering jadi pengganti Windows"
+msgstr "Most frequent Windows replacements"
 
 #: catalog/templates/catalog/windows_detail.html:6
 msgid "Pengganti di Linux"

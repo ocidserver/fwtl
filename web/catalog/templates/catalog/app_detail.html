@@ -1,14 +1,31 @@
-{% extends "catalog/base.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{{ app.display_name }} — {{ block.super }}{% endblock %}
 {% block content %}
-<h1>{{ app.display_name }}</h1>
+<h1>{% if icon %}<img src="{{ icon }}" alt="" width="48" height="48" style="vertical-align:middle"> {% endif %}{{ app.display_name }}</h1>
 <p>{% for c in app.categories.all %}<a href="{% url 'category-detail' c.slug %}">{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-{% if desc %}<p>{{ desc|truncatewords:60 }}</p>{% endif %}
+{% if desc %}<p>{{ desc|truncatewords:80 }}</p>{% endif %}
+
+<h2>{% trans "Rating & statistik" %}</h2>
+<table class="attr">
+<tr><th>👍 AUR votes</th><td>{{ votes }}</td></tr>
+<tr><th>🔥 AUR popularity</th><td>{{ popularity }}</td></tr>
+<tr><th>⬇️ {% trans "Unduhan Flathub" %}</th><td>{% if downloads %}{{ downloads }}{% else %}—{% endif %}</td></tr>
+<tr><th>👤 Maintainer (AUR)</th><td>{{ maintainer|default:"—" }}</td></tr>
+<tr><th>📄 {% trans "Lisensi" %}</th><td>{{ licenses|join:", "|default:"—" }}</td></tr>
+{% if developer %}<tr><th>🏢 Developer</th><td>{{ developer }}</td></tr>{% endif %}
+{% if homepage %}<tr><th>🌐 Homepage</th><td><a href="{{ homepage }}">{{ homepage|truncatechars:60 }}</a></td></tr>{% endif %}
+</table>
+
+<h2>{% trans "Cara install" %}</h2>
+{% for p in pkgs %}{% if p.source == "cachyos" %}<code class="install">sudo pacman -S {{ p.name }}</code>{% endif %}{% endfor %}
+{% if aur %}<code class="install">yay -S {{ aur.name }}</code>{% endif %}
+{% if flathub %}<code class="install">flatpak install flathub {{ flathub.name }}</code>{% endif %}
 
 <h2>{% trans "Paket per sumber" %}</h2>
-<ul>
-{% for p in pkgs %}<li><strong>{{ p.source }}</strong>: <code>{{ p.name }}</code>{% if p.version %} ({{ p.version }}){% endif %}{% if p.repository %} [{{ p.repository }}]{% endif %}</li>{% endfor %}
-</ul>
+<table>
+<tr><th>{% trans "Sumber" %}</th><th>{% trans "Nama" %}</th><th>{% trans "Versi" %}</th><th>Repo</th></tr>
+{% for p in pkgs %}<tr><td>{{ p.source }}</td><td><code>{{ p.name }}</code></td><td>{{ p.version|default:"—" }}</td><td>{{ p.repository|default:"—" }}</td></tr>{% endfor %}
+</table>
 
 {% if alts %}
 <h2>{% trans "Pengganti untuk aplikasi Windows" %}</h2>

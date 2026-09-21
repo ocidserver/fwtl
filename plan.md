@@ -55,11 +55,16 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] 111 `Alternative` kurasi dengan kompatibilitas + catatan ID/EN + perintah install per sumber (pacman/yay/flatpak otomatis dari `RawPackage`)
 - [x] Panduan `windows_migration_guide.txt` tergantikan data terstruktur (query-able per Windows app)
 
-## Fase 4 — Web publik MVP (ID/EN) [SELESAI]
+## Fase 4 — Web publik MVP (ID/EN) [SELESAI + ITERASI DOCS]
 - [x] Halaman: home/search, `/apps`, `/kategori/<slug>`, `/windows/<slug>`, `/app/<slug>` (semua 200 OK)
+- [x] Layout dokumentasi ala FMHY: sidebar kiri (Jelajah + 30 Kategori + Dokumentasi), konten utama, responsif
+- [x] Detail aplikasi lengkap: votes, popularity, unduhan Flathub, maintainer, lisensi, developer, homepage, perintah install per sumber, tabel paket
+- [x] `/top/`: AUR by votes, AUR by popularity, Flathub by unduhan, paling sering jadi pengganti
+- [x] Dokumentasi: `/docs/install|migrasi|sumber-data|faq` (ID/EN)
 - [x] Search sederhana `icontains` (SQLite; FTS Postgres dijadwalkan saat migrasi DB)
 - [x] Switcher bahasa ID/EN (`i18n_patterns`, `set_language`), string UI via `gettext` + `.mo` terkompilasi, konten via field `_id/_en`, `hreflang` + `sitemap.xml`
 - [x] Produksi lokal: gunicorn + WhiteNoise + `collectstatic` OK, flag `BEHIND_CLOUDFLARE`, baca `RUN.md`
+- [ ] `sync_flathub_stats` (installs_total → extra.downloads) — SEDANG BERJALAN di background
 
 ## Fase 5 — Polish & deploy
 - [ ] Dockerfile + deploy (Fly.io/Render/VPS), backup DB, alert sync gagal

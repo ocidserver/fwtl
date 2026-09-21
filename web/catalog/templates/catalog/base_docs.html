@@ -1,0 +1,83 @@
+{% load i18n %}{% get_current_language as LANG %}<!DOCTYPE html>
+<html lang="{{ LANG }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% trans "Migrasi Windows ke Linux" %}{% endblock %}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+{% if LANG == "en" %}
+<link rel="alternate" hreflang="id" href="{{ request.path|slice:'3:' }}">
+<link rel="alternate" hreflang="en" href="{{ request.path }}">
+{% else %}
+<link rel="alternate" hreflang="id" href="{{ request.path }}">
+<link rel="alternate" hreflang="en" href="/en{{ request.path }}">
+{% endif %}
+<style>
+:root{--side-w:270px}
+body{margin:0}
+.layout{display:flex;min-height:100vh}
+aside.side{width:var(--side-w);flex-shrink:0;border-right:1px solid var(--muted-border-color);padding:1rem .9rem;position:sticky;top:0;height:100vh;overflow-y:auto}
+main.doc{flex:1;min-width:0;max-width:900px;padding:1.2rem 1.6rem}
+.side h4{font-size:.8em;text-transform:uppercase;color:var(--muted-color);margin:1.1rem 0 .4rem}
+.side ul{list-style:none;margin:0;padding:0}
+.side li{margin:.15rem 0}
+.side a.side-link{display:block;padding:.3rem .55rem;border-radius:.4rem;text-decoration:none;font-size:.93em}
+.side a.side-link:hover{background:var(--muted-border-color)}
+.side a.active{background:var(--primary-focus);font-weight:bold}
+.side .count{float:right;font-size:.8em;color:var(--muted-color)}
+.brand{font-size:1.15em;font-weight:bold}
+.brand a{text-decoration:none}
+.topbar{display:flex;gap:.6rem;align-items:center;margin-bottom:1rem}
+.topbar form{flex:1;margin:0}
+.menu-toggle{display:none}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem}
+.card{border:1px solid var(--muted-border-color);border-radius:.5rem;padding:.75rem}
+.compat{font-weight:bold;color:var(--primary)}
+code.install{display:block;white-space:pre-wrap;font-size:.82em;background:var(--card-background-color);padding:.5rem;border-radius:.4rem;margin:.3rem 0}
+table.attr{font-size:.9em}
+table.attr th{white-space:nowrap;width:180px}
+@media (max-width:860px){
+  .layout{flex-direction:column}
+  aside.side{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--muted-border-color);max-height:45vh}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><a href="/">🐧 {% trans "MigrasiLinux" %}</a></div>
+<h4>{% trans "Jelajah" %}</h4>
+<ul>
+<li><a class="side-link" href="/">🏠 {% trans "Beranda" %}</a></li>
+<li><a class="side-link" href="{% url 'top-list' %}">🏆 {% trans "Top Apps" %}</a></li>
+<li><a class="side-link" href="{% url 'app-list' %}">📦 {% trans "Semua Aplikasi" %}</a></li>
+<li><a class="side-link" href="{% url 'windows-list' %}">🪟 Windows → Linux</a></li>
+</ul>
+<h4>{% trans "Kategori" %}</h4>
+<ul>
+{% for c in side_cats %}<li><a class="side-link" href="{% url 'category-detail' c.slug %}">{% if side_lang == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}<span class="count">{{ c.n }}</span></a></li>{% endfor %}
+</ul>
+<h4>{% trans "Dokumentasi" %}</h4>
+<ul>
+{% for slug, nm_id, nm_en in side_docs %}<li><a class="side-link" href="{% url 'doc-page' slug %}">📖 {% if side_lang == "id" %}{{ nm_id }}{% else %}{{ nm_en }}{% endif %}</a></li>{% endfor %}
+</ul>
+<h4>{% trans "Bahasa" %}</h4>
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+<input type="hidden" name="next" value="{{ request.path }}">
+<select name="language" onchange="this.form.submit()">
+<option value="id" {% if LANG == "id" %}selected{% endif %}>Indonesia</option>
+<option value="en" {% if LANG == "en" %}selected{% endif %}>English</option>
+</select></form>
+</aside>
+<main class="doc">
+<div class="topbar">
+<form action="{% url 'app-list' %}" method="get" role="search">
+<input type="search" name="q" value="{{ q|default:'' }}" placeholder="{% trans 'Cari aplikasi…' %}">
+</form>
+</div>
+{% block content %}{% endblock %}
+<hr><small>{% trans "Data dari CachyOS, AUR, dan Flathub." %}</small>
+</main>
+</div>
+</body>
+</html>
