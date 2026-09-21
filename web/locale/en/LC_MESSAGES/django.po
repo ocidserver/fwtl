@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 16:25+0700\n"
+"POT-Creation-Date: 2026-09-21 18:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgid "Pengganti untuk aplikasi Windows"
 msgstr "Replacements for Windows apps"
 
 #: catalog/templates/catalog/app_list.html:8
-#: catalog/templates/catalog/base_docs.html:138
+#: catalog/templates/catalog/base_docs.html:144
 msgid "Cari aplikasi…"
 msgstr "Search apps…"
 
@@ -76,19 +76,19 @@ msgstr "All categories"
 msgid "Tidak ditemukan."
 msgstr "Not found."
 
-#: catalog/templates/catalog/base_docs.html:132
-#: catalog/templates/catalog/base_docs.html:143
+#: catalog/templates/catalog/base_docs.html:158
+#: catalog/templates/catalog/base_docs.html:169
 #: catalog/templates/catalog/home.html:3
 msgid "Beranda"
 msgstr "Home"
 
-#: catalog/templates/catalog/base_docs.html:141
+#: catalog/templates/catalog/base_docs.html:167
 msgid "Jelajah"
 msgstr "Explore"
 
-#: catalog/templates/catalog/base_docs.html:144
-#: catalog/templates/catalog/home.html:14
-#: catalog/templates/catalog/home.html:35
+#: catalog/templates/catalog/base_docs.html:170
+#: catalog/templates/catalog/home.html:17
+#: catalog/templates/catalog/home.html:38
 #: catalog/templates/catalog/top_list.html:2
 #: catalog/templates/catalog/top_list.html:3
 #: catalog/templates/catalog/top_list.html:4
@@ -96,13 +96,13 @@ msgstr "Explore"
 msgid "Top Apps"
 msgstr "Top Apps"
 
-#: catalog/templates/catalog/base_docs.html:145
+#: catalog/templates/catalog/base_docs.html:171
 #, fuzzy
 #| msgid "Aplikasi"
 msgid "Semua Aplikasi"
 msgstr "Apps"
 
-#: catalog/templates/catalog/base_docs.html:148
+#: catalog/templates/catalog/base_docs.html:174
 #: catalog/templates/catalog/category_detail.html:3
 #: catalog/templates/catalog/category_list.html:2
 #: catalog/templates/catalog/category_list.html:3
@@ -112,19 +112,23 @@ msgstr "Apps"
 msgid "Kategori"
 msgstr "Categories"
 
-#: catalog/templates/catalog/base_docs.html:152
-#: catalog/templates/catalog/base_docs.html:162
-#: catalog/templates/catalog/home.html:58
+#: catalog/templates/catalog/base_docs.html:178
+#: catalog/templates/catalog/base_docs.html:188
+#: catalog/templates/catalog/home.html:61
 msgid "Dokumentasi"
 msgstr "Documentation"
 
-#: catalog/templates/catalog/base_docs.html:168
+#: catalog/templates/catalog/base_docs.html:194
 msgid "Data dari CachyOS, AUR, dan Flathub."
 msgstr "Data from CachyOS, AUR, and Flathub."
 
-#: catalog/templates/catalog/base_docs.html:168
+#: catalog/templates/catalog/base_docs.html:194
 msgid "Kembali ke atas"
 msgstr "Back to top"
+
+#: catalog/templates/catalog/base_docs.html:198
+msgid "Di halaman ini"
+msgstr "On this page"
 
 #: catalog/templates/catalog/category_detail.html:8
 msgid "Aplikasi Windows di kategori ini"
@@ -139,7 +143,7 @@ msgid "Belum ada."
 msgstr "None yet."
 
 #: catalog/templates/catalog/category_list.html:8
-#: catalog/templates/catalog/home.html:45
+#: catalog/templates/catalog/home.html:48
 msgid "aplikasi"
 msgstr "apps"
 
@@ -187,7 +191,7 @@ msgstr "Sources are synced periodically; see Data Sources."
 #: catalog/templates/catalog/docs/install.html:3
 #: catalog/templates/catalog/docs/install.html:4
 #: catalog/templates/catalog/docs/install.html:5
-#: catalog/templates/catalog/home.html:15
+#: catalog/templates/catalog/home.html:18
 msgid "Cara Install"
 msgstr "Installation"
 
@@ -241,44 +245,44 @@ msgid ""
 "AUR; total unduhan dari statistik Flathub."
 msgstr ""
 
-#: catalog/templates/catalog/home.html:10
+#: catalog/templates/catalog/home.html:13
 msgid ""
 "Temukan padanan Linux untuk setiap aplikasi Windows — dengan skor "
 "kompatibilitas, perintah install, dan data dari CachyOS, AUR, dan Flathub."
 msgstr ""
 
-#: catalog/templates/catalog/home.html:18
+#: catalog/templates/catalog/home.html:21
 #, fuzzy
 #| msgid "Aplikasi Linux"
 msgid "aplikasi Linux"
 msgstr "Linux apps"
 
-#: catalog/templates/catalog/home.html:20
+#: catalog/templates/catalog/home.html:23
 #, fuzzy
 #| msgid "alternatif"
 msgid "alternatif kurasi"
 msgstr "alternatives"
 
-#: catalog/templates/catalog/home.html:27
+#: catalog/templates/catalog/home.html:30
 msgid "Hasil cepat"
 msgstr "Quick results"
 
-#: catalog/templates/catalog/home.html:39
+#: catalog/templates/catalog/home.html:42
 #, fuzzy
 #| msgid "Lihat semua aplikasi Windows…"
 msgid "Lihat semua Top Apps…"
 msgstr "See all Windows apps…"
 
-#: catalog/templates/catalog/home.html:43
+#: catalog/templates/catalog/home.html:46
 msgid "Jelajahi per kategori"
 msgstr "Browse by category"
 
-#: catalog/templates/catalog/home.html:52
+#: catalog/templates/catalog/home.html:55
 #: catalog/templates/catalog/windows_list.html:10
 msgid "alternatif"
 msgstr "alternatives"
 
-#: catalog/templates/catalog/home.html:54
+#: catalog/templates/catalog/home.html:57
 msgid "Lihat semua aplikasi Windows…"
 msgstr "See all Windows apps…"
 
