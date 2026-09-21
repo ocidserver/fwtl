@@ -12,7 +12,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [ ] Fase 0 — Fondasi
 - [x] Fase 1 — Ingestion (CachyOS, AUR, Flathub)
 - [x] Fase 2 — Normalisasi & pengelompokan
-- [ ] Fase 3 — Rekomendasi Windows
+- [x] Fase 3 — Rekomendasi Windows
 - [ ] Fase 4 — Web publik MVP
 - [ ] Fase 5 — Polish & deploy
 
@@ -50,11 +50,10 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Review internal: distribusi + sampel merge OK. Catatan kualitas: keyword substring terlalu longgar (`tar`→`avatar`, `go`→`mongo`) sehingga `development-tools` 56rb & `archive-compression` 15rb kemungkinan over-match — perbaiki dengan word-boundary/allowlist di iterasi berikutnya
 - [ ] Halaman review internal hasil grouping sebelum publik (pindah ke Fase 4 sebagai admin view)
 
-## Fase 3 — Rekomendasi Windows
-- [ ] Seed ~100 `WindowsApp` populer (browser, office, adobe, steam, discord, vscode, dll)
-- [ ] `Alternative(windows_app → app, compatibility %, notes_id/notes_en, install_cmd per source)`
-- [ ] Migrasi `windows_migration_guide.txt` → data terstruktur + terjemahan EN
-- [ ] Vote/lapor koreksi (awal: admin-only)
+## Fase 3 — Rekomendasi Windows [SELESAI]
+- [x] Seed 125 `WindowsApp` dari `windows_alt` classifier (29 kategori)
+- [x] 111 `Alternative` kurasi dengan kompatibilitas + catatan ID/EN + perintah install per sumber (pacman/yay/flatpak otomatis dari `RawPackage`)
+- [x] Panduan `windows_migration_guide.txt` tergantikan data terstruktur (query-able per Windows app)
 
 ## Fase 4 — Web publik MVP (ID/EN)
 - [ ] Halaman: home/search, `/apps`, `/kategori/<slug>`, `/windows/<slug>`, `/app/<slug>`
