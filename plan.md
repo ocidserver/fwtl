@@ -10,7 +10,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 ## Status
 - [x] Riset/scraper lama (CachyOS ~38rb, AUR ~104rb paket) + classifier keyword 29 kategori
 - [ ] Fase 0 — Fondasi
-- [ ] Fase 1 — Ingestion (CachyOS, AUR, Flathub)
+- [x] Fase 1 — Ingestion (CachyOS, AUR, Flathub)
 - [ ] Fase 2 — Normalisasi & pengelompokan
 - [ ] Fase 3 — Rekomendasi Windows
 - [ ] Fase 4 — Web publik MVP
@@ -26,7 +26,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Model dasar: `Source`, `RawPackage`, `App`, `Category`, `WindowsApp`, `Alternative`, `SyncLog`
 - [x] Django Admin terdaftar untuk semua model di atas
 
-## Fase 1 — Ingestion lengkap [BERJALAN: Flathub full di background, AUR menyusul]
+## Fase 1 — Ingestion lengkap [SELESAI]
 ### 1a. CachyOS (`packages.cachyos.org/api/search`)
 - [x] Port `cachyos_extractor.py` → `manage.py sync_cachyos`
 - [x] Incremental by `build_date_unix`, retry/backoff + resume checkpoint
@@ -35,11 +35,12 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 ### 1b. AUR (`packages.gz` + RPC `multiinfo`)
 - [x] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, bulk upsert, retry)
 - [x] Uji `--max-batches 2` OK (200/200 insert; total AUR kini 119.744 paket)
-- [ ] Full sync (~1.200 batch) — SEDANG BERJALAN di background (bulk upsert)
+- [x] Full sync (~1.200 batch) — SELESAI: 1.198 batch, 119.744 total (119.544 insert + 200 update)
 ### 1c. Flathub (baru)
 - [x] `manage.py sync_flathub` (daftar ID + detail per app via `/api/v2/appstream`, bulk upsert)
 - [x] Uji `--max-apps 5` OK (5/5 insert; total 3.327 aplikasi)
 - [x] Full sync (~3.327 app) — SELESAI: 3.327 total (3.322 insert + 5 update)
+**Total DB: 162.464 row (CachyOS 39.393 + AUR 119.744 + Flathub 3.327)**
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
 ## Fase 2 — Normalisasi & pengelompokan
