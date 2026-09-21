@@ -64,7 +64,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Search sederhana `icontains` (SQLite; FTS Postgres dijadwalkan saat migrasi DB)
 - [x] Switcher bahasa ID/EN (`i18n_patterns`, `set_language`), string UI via `gettext` + `.mo` terkompilasi, konten via field `_id/_en`, `hreflang` + `sitemap.xml`
 - [x] Produksi lokal: gunicorn + WhiteNoise + `collectstatic` OK, flag `BEHIND_CLOUDFLARE`, baca `RUN.md`
-- [ ] `sync_flathub_stats` (installs_total → extra.downloads) — SEDANG BERJALAN di background
+- [x] `sync_flathub_stats` (installs_total → extra.downloads) — SELESAI: 3.325/3.327 app (Firefox 12,2 jt, Chrome 12,1 jt)
 
 ## Fase 5 — Polish & deploy
 - [ ] Dockerfile + deploy (Fly.io/Render/VPS), backup DB, alert sync gagal
