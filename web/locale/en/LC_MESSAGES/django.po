@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 18:08+0700\n"
+"POT-Creation-Date: 2026-09-21 19:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgid "Pengganti untuk aplikasi Windows"
 msgstr "Replacements for Windows apps"
 
 #: catalog/templates/catalog/app_list.html:8
-#: catalog/templates/catalog/base_docs.html:144
+#: catalog/templates/catalog/base_docs.html:158
 msgid "Cari aplikasi…"
 msgstr "Search apps…"
 
@@ -76,17 +76,16 @@ msgstr "All categories"
 msgid "Tidak ditemukan."
 msgstr "Not found."
 
-#: catalog/templates/catalog/base_docs.html:158
-#: catalog/templates/catalog/base_docs.html:169
+#: catalog/templates/catalog/base_docs.html:177
+msgid "Jelajah"
+msgstr "Explore"
+
+#: catalog/templates/catalog/base_docs.html:179
 #: catalog/templates/catalog/home.html:3
 msgid "Beranda"
 msgstr "Home"
 
-#: catalog/templates/catalog/base_docs.html:167
-msgid "Jelajah"
-msgstr "Explore"
-
-#: catalog/templates/catalog/base_docs.html:170
+#: catalog/templates/catalog/base_docs.html:180
 #: catalog/templates/catalog/home.html:17
 #: catalog/templates/catalog/home.html:38
 #: catalog/templates/catalog/top_list.html:2
@@ -96,37 +95,38 @@ msgstr "Explore"
 msgid "Top Apps"
 msgstr "Top Apps"
 
-#: catalog/templates/catalog/base_docs.html:171
+#: catalog/templates/catalog/base_docs.html:181
 #, fuzzy
 #| msgid "Aplikasi"
 msgid "Semua Aplikasi"
 msgstr "Apps"
 
-#: catalog/templates/catalog/base_docs.html:174
+#: catalog/templates/catalog/base_docs.html:184
 #: catalog/templates/catalog/category_detail.html:3
 #: catalog/templates/catalog/category_list.html:2
 #: catalog/templates/catalog/category_list.html:3
 #: catalog/templates/catalog/category_list.html:4
 #: catalog/templates/catalog/category_list.html:5
+#: catalog/templates/catalog/subcategory_detail.html:3
 #: catalog/templates/catalog/windows_detail.html:7
 msgid "Kategori"
 msgstr "Categories"
 
-#: catalog/templates/catalog/base_docs.html:178
 #: catalog/templates/catalog/base_docs.html:188
+#: catalog/templates/catalog/base_docs.html:198
 #: catalog/templates/catalog/home.html:61
 msgid "Dokumentasi"
 msgstr "Documentation"
 
-#: catalog/templates/catalog/base_docs.html:194
+#: catalog/templates/catalog/base_docs.html:203
 msgid "Data dari CachyOS, AUR, dan Flathub."
 msgstr "Data from CachyOS, AUR, and Flathub."
 
-#: catalog/templates/catalog/base_docs.html:194
+#: catalog/templates/catalog/base_docs.html:203
 msgid "Kembali ke atas"
 msgstr "Back to top"
 
-#: catalog/templates/catalog/base_docs.html:198
+#: catalog/templates/catalog/base_docs.html:207
 msgid "Di halaman ini"
 msgstr "On this page"
 
@@ -134,11 +134,14 @@ msgstr "On this page"
 msgid "Aplikasi Windows di kategori ini"
 msgstr "Windows apps in this category"
 
-#: catalog/templates/catalog/category_detail.html:11
-msgid "Aplikasi Linux"
-msgstr "Linux apps"
+#: catalog/templates/catalog/category_detail.html:17
+#, fuzzy
+#| msgid "Lihat semua aplikasi Windows…"
+msgid "Lihat semua"
+msgstr "See all Windows apps…"
 
-#: catalog/templates/catalog/category_detail.html:13
+#: catalog/templates/catalog/category_detail.html:19
+#: catalog/templates/catalog/subcategory_detail.html:9
 msgid "Belum ada."
 msgstr "None yet."
 
@@ -321,6 +324,9 @@ msgstr "No curated alternatives yet."
 #: catalog/templates/catalog/windows_list.html:6
 msgid "Pilih aplikasi Windows untuk melihat pengganti Linux-nya."
 msgstr "Pick a Windows app to see its Linux replacements."
+
+#~ msgid "Aplikasi Linux"
+#~ msgstr "Linux apps"
 
 #~ msgid "Migrasi Windows ke Linux"
 #~ msgstr "Migrate from Windows to Linux"

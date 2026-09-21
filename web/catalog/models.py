@@ -40,6 +40,22 @@ class CategoryRule(models.Model):
         return f"{self.keyword} -> {self.category.slug}"
 
 
+class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subs")
+    slug = models.SlugField(max_length=120, unique=True)
+    name_id = models.CharField(max_length=120)
+    name_en = models.CharField(max_length=120)
+    keywords = models.TextField(blank=True, help_text="Kata kunci koma-pisah untuk auto-assign")
+    priority = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ["category__slug", "priority", "name_en"]
+        verbose_name_plural = "subcategories"
+
+    def __str__(self):
+        return f"{self.category.slug} / {self.name_en}"
+
+
 class App(models.Model):
     """Entitas kanonis: gabungan nama yang sama lintas sumber."""
     slug = models.SlugField(max_length=120, unique=True)
@@ -49,6 +65,7 @@ class App(models.Model):
     description_id = models.TextField(blank=True)
     description_en = models.TextField(blank=True)
     categories = models.ManyToManyField(Category, blank=True, related_name="apps")
+    subcategories = models.ManyToManyField(SubCategory, blank=True, related_name="apps")
     is_gui = models.BooleanField(default=True)
     homepage = models.URLField(blank=True)
     icon_url = models.URLField(blank=True)
@@ -102,6 +119,7 @@ class Alternative(models.Model):
     install_cachyos = models.CharField(max_length=200, blank=True)
     install_aur = models.CharField(max_length=200, blank=True)
     install_flathub = models.CharField(max_length=200, blank=True)
+    is_published = models.BooleanField(default=True, help_text="Hanya yang published tampil di situs")
 
     class Meta:
         unique_together = [("windows_app", "app")]

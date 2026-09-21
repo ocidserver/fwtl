@@ -31,6 +31,9 @@ cloudflared tunnel --url http://127.0.0.1:8000
 
 ## 3. Sync data berkala (mingguan, opsional)
 
+> **Matikan web dulu** — job tulis mengunci SQLite:
+> `kill $(cat /tmp/opencode/dashboard.pid)` — nyalakan lagi setelah selesai (perintah no. 1).
+
 ```bash
 cd /home/ocid/Code/cachyrepo
 .venv/bin/python web/manage.py sync_cachyos

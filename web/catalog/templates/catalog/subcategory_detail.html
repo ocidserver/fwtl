@@ -1,0 +1,16 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
+{% block title %}{% if LANG == "id" %}{{ sub.name_id }}{% else %}{{ sub.name_en }}{% endif %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Kategori" %}{% endblock %}
+{% block crumb2 %}{% if LANG == "id" %}{{ sub.name_id }}{% else %}{{ sub.name_en }}{% endif %}{% endblock %}
+{% block doctitle %}{% if LANG == "id" %}{{ sub.name_id }}{% else %}{{ sub.name_en }}{% endif %}{% endblock %}
+{% block docsub %}<p class="sub"><a href="{% url 'category-detail' cat.slug %}">{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}</a></p>{% endblock %}
+{% block content %}
+<ul class="applist">
+{% for a in page %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><small>{{ a.slug }}</small></li>{% empty %}<li>{% trans "Belum ada." %}</li>{% endfor %}
+</ul>
+{% if page.has_other_pages %}<p>
+{% if page.has_previous %}<a href="?page={{ page.previous_page_number }}">←</a>{% endif %}
+{{ page.number }} / {{ page.paginator.num_pages }}
+{% if page.has_next %}<a href="?page={{ page.next_page_number }}">→</a>{% endif %}
+</p>{% endif %}
+{% endblock %}

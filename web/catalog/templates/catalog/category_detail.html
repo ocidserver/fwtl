@@ -8,13 +8,13 @@
 <h2>{% trans "Aplikasi Windows di kategori ini" %}</h2>
 <ul>{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}</ul>
 {% endif %}
-<h2>{% trans "Aplikasi Linux" %}</h2>
+{% for s in subs %}
+{% with sname=s.name_id|default:s.name_en %}
+<h2 id="{{ s.slug }}">{% if LANG == "id" %}{{ s.name_id }}{% else %}{{ s.name_en }}{% endif %} <small>({{ s.n }})</small></h2>
 <ul class="applist">
-{% for a in page %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><small>{{ a.slug }}</small></li>{% empty %}<li>{% trans "Belum ada." %}</li>{% endfor %}
+{% for a in s.sample %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><small>{{ a.slug }}</small></li>{% endfor %}
 </ul>
-{% if page.has_other_pages %}<p>
-{% if page.has_previous %}<a href="?page={{ page.previous_page_number }}">←</a>{% endif %}
-{{ page.number }} / {{ page.paginator.num_pages }}
-{% if page.has_next %}<a href="?page={{ page.next_page_number }}">→</a>{% endif %}
-</p>{% endif %}
+<p><a href="{% url 'subcategory-detail' cat.slug s.short %}">{% trans "Lihat semua" %} →</a></p>
+{% endwith %}
+{% empty %}<p>{% trans "Belum ada." %}</p>{% endfor %}
 {% endblock %}

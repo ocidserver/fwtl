@@ -43,12 +43,11 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 **Total DB: 162.464 row (CachyOS 39.393 + AUR 119.744 + Flathub 3.327)**
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
-## Fase 2 — Normalisasi & pengelompokan [SELESAI]
-- [x] Tabel kanonis `App`: 162.464 raw → 117.379 App lintas sumber (cth: `firefox`+`firefox-bin`+`org.mozilla.firefox` → 1 App "Firefox")
-- [x] Rules kategori dari `package_classifier.py` → 30 kategori + 321 `CategoryRule`; 205.440 relasi
-- [x] Tandai `is_gui`: 91.736 GUI / 25.643 non-GUI (libs, fonts, *-dev disembunyikan dari UI nanti)
-- [x] Review internal: distribusi + sampel merge OK. Catatan kualitas: keyword substring terlalu longgar (`tar`→`avatar`, `go`→`mongo`) sehingga `development-tools` 56rb & `archive-compression` 15rb kemungkinan over-match — perbaiki dengan word-boundary/allowlist di iterasi berikutnya
-- [ ] Halaman review internal hasil grouping sebelum publik (pindah ke Fase 4 sebagai admin view)
+## Fase 2 — Normalisasi & pengelompokan [SELESAI + SUBKATEGORI]
+- [x] Tabel kanonis `App`: 162.464 raw → 117.379 App lintas sumber
+- [x] Rules kategori → 30 kategori; `reclassify` (word-boundary + names-only + strip sufiks): dev-tools 56rb→21,7rb, firefox→browser, 0verkill→gaming
+- [x] 108 `SubCategory` (3-5 per kategori) + `assign_subcategories`; halaman `/kategori/<cat>/<sub>/`, kategori dikelompokkan per sub
+- [x] Tandai `is_gui`: 91.736 GUI / 25.643 non-GUI
 
 ## Fase 3 — Rekomendasi Windows [SELESAI]
 - [x] Seed 125 `WindowsApp` dari `windows_alt` classifier (29 kategori)
@@ -76,5 +75,10 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - Postgres (bukan SQLite) — butuh FTS + konkurensi tulis ETL
 - ID default, EN kedua; konten model duplikat `_id/_en`
 
-## Cara eksekusi
-Kerjakan berurutan per checkbox, commit per sub-fase, jangan loncat ke web sebelum ingestion stabil.
+## Catatan operasional
+- Job tulis panjang (`sync_*`, `build_apps`, `reclassify`, `assign_*`) harus jalan saat
+  web MATI — SQLite mengunci DB dan job bisa gagal di tengah (pernah merusak
+  relasi kategori; recovery: matikan web, ulangi job). Lihat `RUN.md`.
+- Klasifikasi keyword punya batas inheren (kata umum di deskripsi). Perbaikan
+  yang sudah diterapkan: word-boundary utk keyword ≤3 huruf, keyword pendek
+  hanya di nama paket, strip sufiks `-git/-bin/dll`.

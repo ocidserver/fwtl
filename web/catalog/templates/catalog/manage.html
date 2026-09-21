@@ -1,0 +1,43 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}Manage — FWTL{% endblock %}
+{% block crumb %}Manage{% endblock %}
+{% block crumb2 %}Dashboard{% endblock %}
+{% block doctitle %}🛠️ Manage Dashboard{% endblock %}
+{% block docsub %}<p class="sub">Internal — khusus staff. Untuk publik gunakan halaman biasa.</p>{% endblock %}
+{% block leftbar %}{% endblock %}
+{% block rightbar %}{% endblock %}
+{% block mainclass %}landing{% endblock %}
+{% block content %}
+<section id="stats">
+<h2><span class="secmark">§</span> Statistik</h2>
+<table>
+<tr><th>App (GUI / total)</th><td>{{ stats.gui }} / {{ stats.apps }}</td></tr>
+<tr><th>RawPackage</th><td>{{ stats.raw }}</td></tr>
+<tr><th>Kategori / Subkategori</th><td>{{ stats.cats }} / {{ stats.subs }}</td></tr>
+<tr><th>WindowsApp / Alternative (unpublished)</th><td>{{ stats.wins }} / {{ stats.alts }} ({{ stats.unpub }})</td></tr>
+<tr><th>GUI tanpa kategori (Other)</th><td>{{ stats.uncategorized }}</td></tr>
+<tr><th>User (staff)</th><td>{{ stats.users }} ({{ stats.staff }})</td></tr>
+</table>
+<p><a href="/admin/">Django Admin →</a></p>
+</section>
+<section id="sync">
+<h2><span class="secmark">§</span> Sync terakhir</h2>
+<table>
+<tr><th>Sumber</th><th>Status</th><th>Total</th><th>Mulai</th></tr>
+{% for l in logs %}<tr><td>{{ l.source }}</td><td>{{ l.status }}</td><td>{{ l.total }}</td><td>{{ l.started_at|date:"m-d H:i" }}</td></tr>{% endfor %}
+</table>
+<p>Jalankan via CLI: <code class="inline">manage.py sync_cachyos|sync_aur|sync_flathub|sync_flathub_stats</code> lalu <code class="inline">build_apps|reclassify|assign_subcategories|seed_windows</code></p>
+</section>
+<section id="quality">
+<h2><span class="secmark">§</span> Antrean kualitas</h2>
+<h3>Top subkategori</h3>
+<ul>{% for s in top_subs %}<li><code class="inline">{{ s.slug }}</code> — {{ s.n }}</li>{% endfor %}</ul>
+<h3>Sampel Other (perlu kurasi)</h3>
+<ul>{% for a in sample_other %}<li><a href="/admin/catalog/app/{{ a.id }}/change/">{{ a.display_name }}</a></li>{% endfor %}</ul>
+</section>
+<section id="users">
+<h2><span class="secmark">§</span> User terbaru</h2>
+<ul>{% for u in users %}<li>{{ u.username }}{% if u.is_staff %} (staff){% endif %} — {{ u.date_joined|date:"Y-m-d" }}</li>{% endfor %}</ul>
+<p><a href="/admin/auth/user/">Kelola user →</a> <a href="/admin/auth/group/">Grup & peran →</a></p>
+</section>
+{% endblock %}
