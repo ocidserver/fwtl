@@ -31,7 +31,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Port `cachyos_extractor.py` → `manage.py sync_cachyos`
 - [x] Incremental by `build_date_unix`, retry/backoff + resume checkpoint
 - [x] Simpan ke `RawPackage(source=cachyos)` + tulis `SyncLog`
-- [ ] Full sync semua halaman (~380 hal, ~2 mnt) — baru uji `--max-pages 1`
+- [x] Full sync semua halaman (~380 hal, ~2 mnt) — SELESAI: 397 hal, 39.602 entri (29.797 insert + 9.805 update), 39.393 row unik di DB
 ### 1b. AUR (`packages.gz` + RPC `multiinfo`)
 - [ ] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, delay sopan)
 - [ ] Simpan votes/popularity/maintainer/last_modified
