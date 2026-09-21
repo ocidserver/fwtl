@@ -1,0 +1,19 @@
+# Data besar — jangan commit (hanya seed kecil)
+*.csv
+*.json
+*.db
+*.db-journal
+*.sqlite3
+
+# Python / Django
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+db.sqlite3
+staticfiles/
+media/
+
+# Riset lama tetap tracked agar ETL bisa di-port:
+# *.py, *.md, *.txt tetap ter-track
