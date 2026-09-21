@@ -26,18 +26,20 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Model dasar: `Source`, `RawPackage`, `App`, `Category`, `WindowsApp`, `Alternative`, `SyncLog`
 - [x] Django Admin terdaftar untuk semua model di atas
 
-## Fase 1 — Ingestion lengkap [SEBAGIAN: CachyOS OK uji 1 halaman]
+## Fase 1 — Ingestion lengkap [BERJALAN: Flathub full di background, AUR menyusul]
 ### 1a. CachyOS (`packages.cachyos.org/api/search`)
 - [x] Port `cachyos_extractor.py` → `manage.py sync_cachyos`
 - [x] Incremental by `build_date_unix`, retry/backoff + resume checkpoint
 - [x] Simpan ke `RawPackage(source=cachyos)` + tulis `SyncLog`
 - [x] Full sync semua halaman (~380 hal, ~2 mnt) — SELESAI: 397 hal, 39.602 entri (29.797 insert + 9.805 update), 39.393 row unik di DB
 ### 1b. AUR (`packages.gz` + RPC `multiinfo`)
-- [ ] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, delay sopan)
-- [ ] Simpan votes/popularity/maintainer/last_modified
+- [x] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, bulk upsert, retry)
+- [x] Uji `--max-batches 2` OK (200/200 insert; total AUR kini 119.744 paket)
+- [ ] Full sync (~1.200 batch) — antre setelah Flathub selesai
 ### 1c. Flathub (baru)
-- [ ] Ambil via AppStream API `https://flathub.org/api/v2/appstream` (+ metadata: summary, description, categories, screenshots)
-- [ ] `manage.py sync_flathub` + `SyncLog`
+- [x] `manage.py sync_flathub` (daftar ID + detail per app via `/api/v2/appstream`, bulk upsert)
+- [x] Uji `--max-apps 5` OK (5/5 insert; total 3.327 aplikasi)
+- [ ] Full sync (~3.327 app) — SEDANG BERJALAN di background
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
 ## Fase 2 — Normalisasi & pengelompokan
