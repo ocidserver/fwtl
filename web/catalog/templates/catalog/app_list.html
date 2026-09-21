@@ -5,15 +5,15 @@
 {% block doctitle %}{% trans "Aplikasi" %}{% endblock %}
 {% block content %}
 <form method="get" role="search">
-<input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Cari aplikasi…' %}" style="width:100%;padding:.5rem .75rem;border:1px solid #e5e7eb;border-radius:.5rem;margin:.4rem 0">
-<select name="cat" onchange="this.form.submit()" style="padding:.5rem;border:1px solid #e5e7eb;border-radius:.5rem">
+<input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Cari aplikasi…' %}" class="searchbig" style="margin:.4rem 0">
+<select name="cat" onchange="this.form.submit()" style="padding:.5rem;border:1px solid var(--border);border-radius:.5rem;background:var(--bg2);color:var(--text);font-family:var(--font-sans)">
 <option value="">{% trans "Semua kategori" %}</option>
 {% for c in cats %}<option value="{{ c.slug }}" {% if cat and cat.slug == c.slug %}selected{% endif %}>{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</option>{% endfor %}
 </select>
 </form>
-<div class="grid-cards">
-{% for a in page %}<div class="card"><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><br><small>{{ a.slug }}</small></div>{% empty %}<p>{% trans "Tidak ditemukan." %}</p>{% endfor %}
-</div>
+<ul class="applist">
+{% for a in page %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><small>{{ a.slug }}</small></li>{% empty %}<li>{% trans "Tidak ditemukan." %}</li>{% endfor %}
+</ul>
 {% if page.has_other_pages %}<p>
 {% if page.has_previous %}<a href="?q={{ q }}&cat={{ cat.slug|default:'' }}&page={{ page.previous_page_number }}">←</a>{% endif %}
 {{ page.number }} / {{ page.paginator.num_pages }}

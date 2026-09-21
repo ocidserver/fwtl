@@ -9,9 +9,9 @@
 <ul>{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}</ul>
 {% endif %}
 <h2>{% trans "Aplikasi Linux" %}</h2>
-<div class="grid-cards">
-{% for a in page %}<div class="card"><a href="{% url 'app-detail' a.slug %}"><strong>{{ a.display_name }}</strong></a></div>{% empty %}<p>{% trans "Belum ada." %}</p>{% endfor %}
-</div>
+<ul class="applist">
+{% for a in page %}<li><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><small>{{ a.slug }}</small></li>{% empty %}<li>{% trans "Belum ada." %}</li>{% endfor %}
+</ul>
 {% if page.has_other_pages %}<p>
 {% if page.has_previous %}<a href="?page={{ page.previous_page_number }}">←</a>{% endif %}
 {{ page.number }} / {{ page.paginator.num_pages }}
