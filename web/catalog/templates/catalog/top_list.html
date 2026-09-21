@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}
 {% block title %}{% trans "Top Apps" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Top Apps" %}{% endblock %}
+{% block crumb2 %}{% trans "Top Apps" %}{% endblock %}
+{% block doctitle %}🏆 {% trans "Top Apps" %}{% endblock %}
 {% block content %}
-<h1>🏆 {% trans "Top Apps" %}</h1>
 
 <h2>👍 {% trans "AUR teratas berdasar votes" %}</h2>
 <ol>

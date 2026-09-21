@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{% trans "Kategori" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Kategori" %}{% endblock %}
+{% block crumb2 %}{% trans "Kategori" %}{% endblock %}
+{% block doctitle %}{% trans "Kategori" %}{% endblock %}
 {% block content %}
-<h1>{% trans "Kategori" %}</h1>
 <div class="grid-cards">
 {% for c in cats %}{% if c.n %}<div class="card"><a href="{% url 'category-detail' c.slug %}"><strong>{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</strong></a><br><small>{{ c.n }} {% trans "aplikasi" %}</small></div>{% endif %}{% endfor %}
 </div>

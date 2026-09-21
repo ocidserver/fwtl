@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}
 {% block title %}{% trans "Panduan Migrasi" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Panduan Migrasi" %}{% endblock %}
+{% block crumb2 %}{% trans "Panduan Migrasi" %}{% endblock %}
+{% block doctitle %}{% trans "Panduan Migrasi" %}{% endblock %}
 {% block content %}
-<h1>🐧 {% trans "Panduan Migrasi Windows ke Linux" %}</h1>
 <ol>
 <li>{% trans "Cari aplikasi Windows-mu di menu Windows → Linux." %}</li>
 <li>{% trans "Bandingkan skor kompatibilitas tiap alternatif." %}</li>

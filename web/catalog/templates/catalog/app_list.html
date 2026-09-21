@@ -1,16 +1,18 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{% trans "Aplikasi" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Aplikasi" %}{% endblock %}
+{% block crumb2 %}{% trans "Aplikasi" %}{% endblock %}
+{% block doctitle %}{% trans "Aplikasi" %}{% endblock %}
 {% block content %}
-<h1>{% trans "Aplikasi" %}{% if cat %}: {% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}{% endif %}</h1>
 <form method="get" role="search">
-<input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Cari aplikasi…' %}">
-<select name="cat" onchange="this.form.submit()">
+<input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Cari aplikasi…' %}" style="width:100%;padding:.5rem .75rem;border:1px solid #e5e7eb;border-radius:.5rem;margin:.4rem 0">
+<select name="cat" onchange="this.form.submit()" style="padding:.5rem;border:1px solid #e5e7eb;border-radius:.5rem">
 <option value="">{% trans "Semua kategori" %}</option>
 {% for c in cats %}<option value="{{ c.slug }}" {% if cat and cat.slug == c.slug %}selected{% endif %}>{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</option>{% endfor %}
 </select>
 </form>
 <div class="grid-cards">
-{% for a in page %}<div class="card"><a href="{% url 'app-detail' a.slug %}"><strong>{{ a.display_name }}</strong></a><br><small>{{ a.slug }}</small></div>{% empty %}<p>{% trans "Tidak ditemukan." %}</p>{% endfor %}
+{% for a in page %}<div class="card"><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a><br><small>{{ a.slug }}</small></div>{% empty %}<p>{% trans "Tidak ditemukan." %}</p>{% endfor %}
 </div>
 {% if page.has_other_pages %}<p>
 {% if page.has_previous %}<a href="?q={{ q }}&cat={{ cat.slug|default:'' }}&page={{ page.previous_page_number }}">←</a>{% endif %}

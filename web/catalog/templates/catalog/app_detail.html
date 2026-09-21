@@ -1,11 +1,14 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{{ app.display_name }} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Aplikasi" %}{% endblock %}
+{% block crumb2 %}{{ app.display_name }}{% endblock %}
+{% block doctitle %}{{ app.display_name }}{% endblock %}
+{% block docsub %}<p class="sub">{% for c in app.categories.all %}<a href="{% url 'category-detail' c.slug %}">{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endblock %}
 {% block content %}
-<h1>{% if icon %}<img src="{{ icon }}" alt="" width="48" height="48" style="vertical-align:middle"> {% endif %}{{ app.display_name }}</h1>
-<p>{% for c in app.categories.all %}<a href="{% url 'category-detail' c.slug %}">{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+{% if icon %}<p><img src="{{ icon }}" alt="" width="64" height="64"></p>{% endif %}
 {% if desc %}<p>{{ desc|truncatewords:80 }}</p>{% endif %}
 
-<h2>{% trans "Rating & statistik" %}</h2>
+<h2 id="rating">{% trans "Rating & statistik" %}</h2>
 <table class="attr">
 <tr><th>👍 AUR votes</th><td>{{ votes }}</td></tr>
 <tr><th>🔥 AUR popularity</th><td>{{ popularity }}</td></tr>
@@ -16,19 +19,19 @@
 {% if homepage %}<tr><th>🌐 Homepage</th><td><a href="{{ homepage }}">{{ homepage|truncatechars:60 }}</a></td></tr>{% endif %}
 </table>
 
-<h2>{% trans "Cara install" %}</h2>
+<h2 id="install">{% trans "Cara install" %}</h2>
 {% for p in pkgs %}{% if p.source == "cachyos" %}<code class="install">sudo pacman -S {{ p.name }}</code>{% endif %}{% endfor %}
 {% if aur %}<code class="install">yay -S {{ aur.name }}</code>{% endif %}
 {% if flathub %}<code class="install">flatpak install flathub {{ flathub.name }}</code>{% endif %}
 
-<h2>{% trans "Paket per sumber" %}</h2>
+<h2 id="paket">{% trans "Paket per sumber" %}</h2>
 <table>
 <tr><th>{% trans "Sumber" %}</th><th>{% trans "Nama" %}</th><th>{% trans "Versi" %}</th><th>Repo</th></tr>
-{% for p in pkgs %}<tr><td>{{ p.source }}</td><td><code>{{ p.name }}</code></td><td>{{ p.version|default:"—" }}</td><td>{{ p.repository|default:"—" }}</td></tr>{% endfor %}
+{% for p in pkgs %}<tr><td>{{ p.source }}</td><td><code class="inline">{{ p.name }}</code></td><td>{{ p.version|default:"—" }}</td><td>{{ p.repository|default:"—" }}</td></tr>{% endfor %}
 </table>
 
 {% if alts %}
-<h2>{% trans "Pengganti untuk aplikasi Windows" %}</h2>
+<h2 id="pengganti">{% trans "Pengganti untuk aplikasi Windows" %}</h2>
 <ul>
 {% for alt in alts %}<li><a href="{% url 'windows-detail' alt.windows_app.slug %}">{{ alt.windows_app.name }}</a> — <span class="compat">{{ alt.compatibility }}%</span></li>{% endfor %}
 </ul>

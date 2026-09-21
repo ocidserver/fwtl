@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{{ win.name }} — {{ block.super }}{% endblock %}
+{% block crumb %}Windows → Linux{% endblock %}
+{% block crumb2 %}{{ win.name }}{% endblock %}
+{% block doctitle %}{{ win.name }}{% endblock %}
 {% block content %}
-<h1>{{ win.name }}</h1>
 {% if win.category %}<p>{% trans "Kategori" %}: <a href="{% url 'category-detail' win.category.slug %}">{% if LANG == "id" %}{{ win.category.name_id }}{% else %}{{ win.category.name_en }}{% endif %}</a></p>{% endif %}
 <h2>{% trans "Pengganti di Linux" %}</h2>
 {% for alt in alts %}

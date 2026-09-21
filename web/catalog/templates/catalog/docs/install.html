@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}
 {% block title %}{% trans "Cara Install" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Cara Install" %}{% endblock %}
+{% block crumb2 %}{% trans "Cara Install" %}{% endblock %}
+{% block doctitle %}{% trans "Cara Install" %}{% endblock %}
 {% block content %}
-<h1>📦 {% trans "Cara Install" %}</h1>
 <h2>CachyOS / Arch (pacman)</h2>
 <code class="install">sudo pacman -S firefox
 sudo pacman -Syu   # update sistem</code>

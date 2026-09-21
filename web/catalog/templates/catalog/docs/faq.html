@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}
 {% block title %}FAQ — {{ block.super }}{% endblock %}
+{% block crumb %}FAQ{% endblock %}
+{% block crumb2 %}FAQ{% endblock %}
+{% block doctitle %}FAQ{% endblock %}
 {% block content %}
-<h1>❓ FAQ</h1>
 <h2>{% trans "Apakah semua aplikasi gratis?" %}</h2>
 <p>{% trans "Sebagian besar alternatif bersifat gratis dan open-source. Sebagian kecil (misal DaVinci Resolve, Dropbox) memiliki versi proprietary dengan akun." %}</p>
 <h2>{% trans "Apa arti skor kompatibilitas?" %}</h2>

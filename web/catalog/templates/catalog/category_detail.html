@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
 {% block title %}{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Kategori" %}{% endblock %}
+{% block crumb2 %}{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}{% endblock %}
+{% block doctitle %}{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}{% endblock %}
 {% block content %}
-<h1>{% if LANG == "id" %}{{ cat.name_id }}{% else %}{{ cat.name_en }}{% endif %}</h1>
 {% if wins %}
 <h2>{% trans "Aplikasi Windows di kategori ini" %}</h2>
 <ul>{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}</ul>

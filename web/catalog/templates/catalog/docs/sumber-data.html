@@ -1,7 +1,9 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}
 {% block title %}{% trans "Sumber Data" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Sumber Data" %}{% endblock %}
+{% block crumb2 %}{% trans "Sumber Data" %}{% endblock %}
+{% block doctitle %}{% trans "Sumber Data" %}{% endblock %}
 {% block content %}
-<h1>🗄️ {% trans "Sumber Data" %}</h1>
 <ul>
 <li><strong>CachyOS</strong> — packages.cachyos.org (nama, versi, repo, arsitektur, tanggal build).</li>
 <li><strong>AUR</strong> — aur.archlinux.org (votes, popularity, maintainer, lisensi, dependensi).</li>
