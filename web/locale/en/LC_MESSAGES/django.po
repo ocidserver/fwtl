@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 15:33+0700\n"
+"POT-Creation-Date: 2026-09-21 16:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,6 @@ msgstr ""
 #: catalog/templates/catalog/app_list.html:3
 #: catalog/templates/catalog/app_list.html:4
 #: catalog/templates/catalog/app_list.html:5
-#: catalog/templates/catalog/base.html:22
 msgid "Aplikasi"
 msgstr "Apps"
 
@@ -64,8 +63,7 @@ msgid "Pengganti untuk aplikasi Windows"
 msgstr "Replacements for Windows apps"
 
 #: catalog/templates/catalog/app_list.html:8
-#: catalog/templates/catalog/base.html:34
-#: catalog/templates/catalog/base_docs.html:112
+#: catalog/templates/catalog/base_docs.html:138
 msgid "Cari aplikasi…"
 msgstr "Search apps…"
 
@@ -78,18 +76,33 @@ msgstr "All categories"
 msgid "Tidak ditemukan."
 msgstr "Not found."
 
-#: catalog/templates/catalog/base.html:6
-#: catalog/templates/catalog/base_docs.html:6
-#: catalog/templates/catalog/base_docs.html:137
-msgid "Migrasi Windows ke Linux"
-msgstr "Migrate from Windows to Linux"
+#: catalog/templates/catalog/base_docs.html:132
+#: catalog/templates/catalog/base_docs.html:143
+#: catalog/templates/catalog/home.html:3
+msgid "Beranda"
+msgstr "Home"
 
-#: catalog/templates/catalog/base.html:20
-msgid "MigrasiLinux"
-msgstr "MigrasiLinux"
+#: catalog/templates/catalog/base_docs.html:141
+msgid "Jelajah"
+msgstr "Explore"
 
-#: catalog/templates/catalog/base.html:23
-#: catalog/templates/catalog/base_docs.html:122
+#: catalog/templates/catalog/base_docs.html:144
+#: catalog/templates/catalog/home.html:14
+#: catalog/templates/catalog/home.html:35
+#: catalog/templates/catalog/top_list.html:2
+#: catalog/templates/catalog/top_list.html:3
+#: catalog/templates/catalog/top_list.html:4
+#: catalog/templates/catalog/top_list.html:5
+msgid "Top Apps"
+msgstr "Top Apps"
+
+#: catalog/templates/catalog/base_docs.html:145
+#, fuzzy
+#| msgid "Aplikasi"
+msgid "Semua Aplikasi"
+msgstr "Apps"
+
+#: catalog/templates/catalog/base_docs.html:148
 #: catalog/templates/catalog/category_detail.html:3
 #: catalog/templates/catalog/category_list.html:2
 #: catalog/templates/catalog/category_list.html:3
@@ -99,42 +112,17 @@ msgstr "MigrasiLinux"
 msgid "Kategori"
 msgstr "Categories"
 
-#: catalog/templates/catalog/base.html:37
-#: catalog/templates/catalog/base_docs.html:142
-msgid "Data dari CachyOS, AUR, dan Flathub."
-msgstr "Data from CachyOS, AUR, and Flathub."
-
-#: catalog/templates/catalog/base_docs.html:93
-#: catalog/templates/catalog/base_docs.html:126
-#: catalog/templates/catalog/base_docs.html:136
+#: catalog/templates/catalog/base_docs.html:152
+#: catalog/templates/catalog/base_docs.html:162
+#: catalog/templates/catalog/home.html:58
 msgid "Dokumentasi"
 msgstr "Documentation"
 
-#: catalog/templates/catalog/base_docs.html:106
-#: catalog/templates/catalog/base_docs.html:117
-#: catalog/templates/catalog/home.html:2 catalog/templates/catalog/home.html:3
-msgid "Beranda"
-msgstr "Home"
+#: catalog/templates/catalog/base_docs.html:168
+msgid "Data dari CachyOS, AUR, dan Flathub."
+msgstr "Data from CachyOS, AUR, and Flathub."
 
-#: catalog/templates/catalog/base_docs.html:115
-msgid "Jelajah"
-msgstr "Explore"
-
-#: catalog/templates/catalog/base_docs.html:118
-#: catalog/templates/catalog/top_list.html:2
-#: catalog/templates/catalog/top_list.html:3
-#: catalog/templates/catalog/top_list.html:4
-#: catalog/templates/catalog/top_list.html:5
-msgid "Top Apps"
-msgstr "Top Apps"
-
-#: catalog/templates/catalog/base_docs.html:119
-#, fuzzy
-#| msgid "Aplikasi"
-msgid "Semua Aplikasi"
-msgstr "Apps"
-
-#: catalog/templates/catalog/base_docs.html:142
+#: catalog/templates/catalog/base_docs.html:168
 msgid "Kembali ke atas"
 msgstr "Back to top"
 
@@ -151,7 +139,7 @@ msgid "Belum ada."
 msgstr "None yet."
 
 #: catalog/templates/catalog/category_list.html:8
-#: catalog/templates/catalog/home.html:16
+#: catalog/templates/catalog/home.html:45
 msgid "aplikasi"
 msgstr "apps"
 
@@ -199,6 +187,7 @@ msgstr "Sources are synced periodically; see Data Sources."
 #: catalog/templates/catalog/docs/install.html:3
 #: catalog/templates/catalog/docs/install.html:4
 #: catalog/templates/catalog/docs/install.html:5
+#: catalog/templates/catalog/home.html:15
 msgid "Cara Install"
 msgstr "Installation"
 
@@ -252,30 +241,44 @@ msgid ""
 "AUR; total unduhan dari statistik Flathub."
 msgstr ""
 
-#: catalog/templates/catalog/home.html:4
-msgid "Pindah dari Windows ke Linux?"
-msgstr "Switching from Windows to Linux?"
+#: catalog/templates/catalog/home.html:10
+msgid ""
+"Temukan padanan Linux untuk setiap aplikasi Windows — dengan skor "
+"kompatibilitas, perintah install, dan data dari CachyOS, AUR, dan Flathub."
+msgstr ""
 
-#: catalog/templates/catalog/home.html:5
-#, python-format
-msgid "%(n)s aplikasi Linux terdata."
-msgid_plural "%(n)s aplikasi Linux terdata."
-msgstr[0] "%(n)s Linux apps indexed."
-msgstr[1] "%(n)s Linux apps indexed."
+#: catalog/templates/catalog/home.html:18
+#, fuzzy
+#| msgid "Aplikasi Linux"
+msgid "aplikasi Linux"
+msgstr "Linux apps"
 
-#: catalog/templates/catalog/home.html:5
-msgid "Cari padanan aplikasi Windows favoritmu."
-msgstr "Find Linux equivalents of your favorite Windows apps."
+#: catalog/templates/catalog/home.html:20
+#, fuzzy
+#| msgid "alternatif"
+msgid "alternatif kurasi"
+msgstr "alternatives"
 
-#: catalog/templates/catalog/home.html:8
+#: catalog/templates/catalog/home.html:27
 msgid "Hasil cepat"
 msgstr "Quick results"
 
-#: catalog/templates/catalog/home.html:14
+#: catalog/templates/catalog/home.html:39
+#, fuzzy
+#| msgid "Lihat semua aplikasi Windows…"
+msgid "Lihat semua Top Apps…"
+msgstr "See all Windows apps…"
+
+#: catalog/templates/catalog/home.html:43
 msgid "Jelajahi per kategori"
 msgstr "Browse by category"
 
-#: catalog/templates/catalog/home.html:23
+#: catalog/templates/catalog/home.html:52
+#: catalog/templates/catalog/windows_list.html:10
+msgid "alternatif"
+msgstr "alternatives"
+
+#: catalog/templates/catalog/home.html:54
 msgid "Lihat semua aplikasi Windows…"
 msgstr "See all Windows apps…"
 
@@ -315,9 +318,23 @@ msgstr "No curated alternatives yet."
 msgid "Pilih aplikasi Windows untuk melihat pengganti Linux-nya."
 msgstr "Pick a Windows app to see its Linux replacements."
 
-#: catalog/templates/catalog/windows_list.html:10
-msgid "alternatif"
-msgstr "alternatives"
+#~ msgid "Migrasi Windows ke Linux"
+#~ msgstr "Migrate from Windows to Linux"
+
+#~ msgid "MigrasiLinux"
+#~ msgstr "MigrasiLinux"
+
+#~ msgid "Pindah dari Windows ke Linux?"
+#~ msgstr "Switching from Windows to Linux?"
+
+#, python-format
+#~ msgid "%(n)s aplikasi Linux terdata."
+#~ msgid_plural "%(n)s aplikasi Linux terdata."
+#~ msgstr[0] "%(n)s Linux apps indexed."
+#~ msgstr[1] "%(n)s Linux apps indexed."
+
+#~ msgid "Cari padanan aplikasi Windows favoritmu."
+#~ msgstr "Find Linux equivalents of your favorite Windows apps."
 
 #~ msgid "Bahasa"
 #~ msgstr "Language"

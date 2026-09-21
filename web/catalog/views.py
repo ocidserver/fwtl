@@ -21,9 +21,12 @@ def home(request):
         results = (App.objects.filter(is_gui=True)
                    .filter(Q(display_name__icontains=q) | Q(slug__icontains=q))[:12])
     cats = Category.objects.annotate(n=Count("apps", filter=Q(apps__is_gui=True))).order_by("-n")
-    wins = WindowsApp.objects.order_by("name")[:12]
+    wins = (WindowsApp.objects.annotate(n=Count("alternatives"))
+            .order_by("-n", "name")[:12])
+    top8 = (RawPackage.objects.filter(source="aur", extra__votes__gt=0)
+            .select_related("app").order_by("-extra__votes")[:8])
     return render(request, "catalog/home.html", {
-        "q": q, "results": results, "cats": cats, "wins": wins,
+        "q": q, "results": results, "cats": cats, "wins": wins, "top8": top8,
         "stats": {
             "apps": App.objects.filter(is_gui=True).count(),
             "wins": WindowsApp.objects.count(),

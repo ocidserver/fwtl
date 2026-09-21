@@ -1,24 +1,63 @@
 {% extends "catalog/base_docs.html" %}{% load i18n %}{% get_current_language as LANG %}
-{% block crumb %}{% trans "Beranda" %}{% endblock %}
+{% block title %}FWTL — From Windows to Linux{% endblock %}
 {% block crumb2 %}{% trans "Beranda" %}{% endblock %}
-{% block doctitle %}{% trans "Pindah dari Windows ke Linux?" %}{% endblock %}
-{% block docsub %}<p class="sub">{% blocktrans count n=stats.apps %}{{ n }} aplikasi Linux terdata.{% plural %}{{ n }} aplikasi Linux terdata.{% endblocktrans %} {% trans "Cari padanan aplikasi Windows favoritmu." %}</p>{% endblock %}
+{% block hero %}{% endblock %}
 {% block content %}
+<section id="introduction">
+<div class="hero">
+<div class="kicker" style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(110,231,183,.8)">📖 FWTL Documentation</div>
+<h1>FWTL</h1>
+<p><strong>From Windows to Linux.</strong> {% trans "Temukan padanan Linux untuk setiap aplikasi Windows — dengan skor kompatibilitas, perintah install, dan data dari CachyOS, AUR, dan Flathub." %}</p>
+<form action="{% url 'app-list' %}" method="get"><input class="searchbig" type="search" name="q" placeholder="Photoshop, Office, Steam…"></form>
+<div class="cta">
+<a class="btn btn-primary" href="{% url 'windows-list' %}">🪟 Windows → Linux</a>
+<a class="btn btn-ghost" href="{% url 'top-list' %}">🏆 {% trans "Top Apps" %}</a>
+<a class="btn btn-ghost" href="{% url 'doc-page' 'install' %}">📖 {% trans "Cara Install" %}</a>
+</div>
+<div class="statrow">
+<div class="stat"><b>{{ stats.apps }}</b><span>{% trans "aplikasi Linux" %}</span></div>
+<div class="stat"><b>{{ stats.wins }}</b><span>Windows app</span></div>
+<div class="stat"><b>{{ stats.alts }}</b><span>{% trans "alternatif kurasi" %}</span></div>
+</div>
+</div>
+</section>
+
 {% if q and results %}
-<h2>{% trans "Hasil cepat" %}</h2>
+<section id="hasil">
+<h2><span class="secmark">§</span> {% trans "Hasil cepat" %}</h2>
 <div class="grid-cards">
 {% for a in results %}<div class="card"><a href="{% url 'app-detail' a.slug %}">{{ a.display_name }}</a></div>{% endfor %}
 </div>
+</section>
 {% endif %}
 
-<h2>{% trans "Jelajahi per kategori" %}</h2>
+<section id="top-apps">
+<h2><span class="secmark">§</span> 🏆 {% trans "Top Apps" %}</h2>
+<ol>
+{% for p in top8 %}<li>{% if p.app %}<a href="{% url 'app-detail' p.app.slug %}">{{ p.app.display_name }}</a>{% else %}<code class="inline">{{ p.name }}</code>{% endif %} — {{ p.extra.votes }} votes</li>{% endfor %}
+</ol>
+<p><a href="{% url 'top-list' %}">{% trans "Lihat semua Top Apps…" %}</a></p>
+</section>
+
+<section id="kategori">
+<h2><span class="secmark">§</span> {% trans "Jelajahi per kategori" %}</h2>
 <div class="grid-cards">
 {% for c in cats %}{% if c.n %}<div class="card"><a href="{% url 'category-detail' c.slug %}">{% if LANG == "id" %}{{ c.name_id }}{% else %}{{ c.name_en }}{% endif %}</a><br><small>{{ c.n }} {% trans "aplikasi" %}</small></div>{% endif %}{% endfor %}
 </div>
+</section>
 
-<h2>Windows → Linux</h2>
+<section id="windows">
+<h2><span class="secmark">§</span> 🪟 Windows → Linux</h2>
 <ul>
-{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a></li>{% endfor %}
+{% for w in wins %}<li><a href="{% url 'windows-detail' w.slug %}">{{ w.name }}</a> <small>({{ w.n }} {% trans "alternatif" %})</small></li>{% endfor %}
 </ul>
 <p><a href="{% url 'windows-list' %}">{% trans "Lihat semua aplikasi Windows…" %}</a></p>
+</section>
+
+<section id="dokumentasi">
+<h2><span class="secmark">§</span> 📖 {% trans "Dokumentasi" %}</h2>
+<ul>
+{% for slug, nm_id, nm_en in side_docs %}<li><a href="{% url 'doc-page' slug %}">{% if LANG == "id" %}{{ nm_id }}{% else %}{{ nm_en }}{% endif %}</a></li>{% endfor %}
+</ul>
+</section>
 {% endblock %}
