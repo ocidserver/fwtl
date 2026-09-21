@@ -11,7 +11,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Riset/scraper lama (CachyOS ~38rb, AUR ~104rb paket) + classifier keyword 29 kategori
 - [ ] Fase 0 — Fondasi
 - [x] Fase 1 — Ingestion (CachyOS, AUR, Flathub)
-- [ ] Fase 2 — Normalisasi & pengelompokan
+- [x] Fase 2 — Normalisasi & pengelompokan
 - [ ] Fase 3 — Rekomendasi Windows
 - [ ] Fase 4 — Web publik MVP
 - [ ] Fase 5 — Polish & deploy
@@ -43,11 +43,12 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 **Total DB: 162.464 row (CachyOS 39.393 + AUR 119.744 + Flathub 3.327)**
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
-## Fase 2 — Normalisasi & pengelompokan
-- [ ] Tabel kanonis `App`: gabung `firefox` (cachyos) + `firefox-bin` (aur) + `org.mozilla.firefox` (flathub) → 1 App
-- [ ] Rules kategori dari `package_classifier.py` → model `CategoryRule` + allowlist manual
-- [ ] Tandai `is_gui` untuk filter dashboard (sembunyikan libs `-dev`, `python-*` lib di UI, tetap di DB)
-- [ ] Halaman review internal hasil grouping sebelum publik
+## Fase 2 — Normalisasi & pengelompokan [SELESAI]
+- [x] Tabel kanonis `App`: 162.464 raw → 117.379 App lintas sumber (cth: `firefox`+`firefox-bin`+`org.mozilla.firefox` → 1 App "Firefox")
+- [x] Rules kategori dari `package_classifier.py` → 30 kategori + 321 `CategoryRule`; 205.440 relasi
+- [x] Tandai `is_gui`: 91.736 GUI / 25.643 non-GUI (libs, fonts, *-dev disembunyikan dari UI nanti)
+- [x] Review internal: distribusi + sampel merge OK. Catatan kualitas: keyword substring terlalu longgar (`tar`→`avatar`, `go`→`mongo`) sehingga `development-tools` 56rb & `archive-compression` 15rb kemungkinan over-match — perbaiki dengan word-boundary/allowlist di iterasi berikutnya
+- [ ] Halaman review internal hasil grouping sebelum publik (pindah ke Fase 4 sebagai admin view)
 
 ## Fase 3 — Rekomendasi Windows
 - [ ] Seed ~100 `WindowsApp` populer (browser, office, adobe, steam, discord, vscode, dll)
