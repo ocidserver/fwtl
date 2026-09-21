@@ -35,11 +35,11 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 ### 1b. AUR (`packages.gz` + RPC `multiinfo`)
 - [x] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, bulk upsert, retry)
 - [x] Uji `--max-batches 2` OK (200/200 insert; total AUR kini 119.744 paket)
-- [ ] Full sync (~1.200 batch) — antre setelah Flathub selesai
+- [ ] Full sync (~1.200 batch) — SEDANG BERJALAN di background (bulk upsert)
 ### 1c. Flathub (baru)
 - [x] `manage.py sync_flathub` (daftar ID + detail per app via `/api/v2/appstream`, bulk upsert)
 - [x] Uji `--max-apps 5` OK (5/5 insert; total 3.327 aplikasi)
-- [ ] Full sync (~3.327 app) — SEDANG BERJALAN di background
+- [x] Full sync (~3.327 app) — SELESAI: 3.327 total (3.322 insert + 5 update)
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
 ## Fase 2 — Normalisasi & pengelompokan
