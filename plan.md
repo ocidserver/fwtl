@@ -26,11 +26,12 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Model dasar: `Source`, `RawPackage`, `App`, `Category`, `WindowsApp`, `Alternative`, `SyncLog`
 - [x] Django Admin terdaftar untuk semua model di atas
 
-## Fase 1 — Ingestion lengkap
+## Fase 1 — Ingestion lengkap [SEBAGIAN: CachyOS OK uji 1 halaman]
 ### 1a. CachyOS (`packages.cachyos.org/api/search`)
-- [ ] Port `cachyos_extractor.py` → `manage.py sync_cachyos`
-- [ ] Incremental by `build_date_unix`, retry/backoff + resume checkpoint
-- [ ] Simpan ke `RawPackage(source=cachyos)` + tulis `SyncLog`
+- [x] Port `cachyos_extractor.py` → `manage.py sync_cachyos`
+- [x] Incremental by `build_date_unix`, retry/backoff + resume checkpoint
+- [x] Simpan ke `RawPackage(source=cachyos)` + tulis `SyncLog`
+- [ ] Full sync semua halaman (~380 hal, ~2 mnt) — baru uji `--max-pages 1`
 ### 1b. AUR (`packages.gz` + RPC `multiinfo`)
 - [ ] Port `aur_scraper.py` → `manage.py sync_aur` (batch 100, delay sopan)
 - [ ] Simpan votes/popularity/maintainer/last_modified
