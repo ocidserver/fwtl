@@ -1,0 +1,29 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}{% trans "Menjalankan Server" %} — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Dokumentasi" %}{% endblock %}
+{% block crumb2 %}{% trans "Menjalankan Server" %}{% endblock %}
+{% block doctitle %}{% trans "Menjalankan Server" %}{% endblock %}
+{% block content %}
+<h2 id="start">Start</h2>
+<code class="install">cd web && ./start.sh</code>
+<p>{% trans "Satu perintah di atas mengurus semuanya: secret key, migrasi, static files, lalu gunicorn di 127.0.0.1:8000." %}</p>
+<h2 id="stop">Stop</h2>
+<code class="install">kill $(cat /tmp/opencode/dashboard.pid)</code>
+<h2 id="tunnel">Tunnel cloudflared</h2>
+<code class="install">cloudflared tunnel --url http://127.0.0.1:8000</code>
+<p>{% trans "Untuk domain sendiri, isi ALLOWED_HOSTS dan CSRF_TRUSTED_ORIGINS sebelum start:" %}</p>
+<code class="install">ALLOWED_HOSTS="domain-kamu,localhost,127.0.0.1" \
+CSRF_TRUSTED_ORIGINS="https://domain-kamu" ./start.sh</code>
+<h2 id="sync">Sync data berkala</h2>
+<p>{% trans "Matikan web dulu (SQLite terkunci saat tulis), lalu:" %}</p>
+<code class="install">.venv/bin/python web/manage.py sync_cachyos
+.venv/bin/python web/manage.py sync_aur
+.venv/bin/python web/manage.py sync_flathub
+.venv/bin/python web/manage.py sync_flathub_stats
+.venv/bin/python web/manage.py build_apps
+.venv/bin/python web/manage.py reclassify
+.venv/bin/python web/manage.py assign_subcategories
+.venv/bin/python web/manage.py seed_windows</code>
+<h2 id="backup">Backup</h2>
+<code class="install">cp web/db.sqlite3 backup/db-$(date +%F).sqlite3</code>
+{% endblock %}

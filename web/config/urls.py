@@ -33,7 +33,7 @@ class DocSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        return ["install", "migrasi", "sumber-data", "faq"]
+        return ["install", "migrasi", "sumber-data", "faq", "menjalankan"]
 
     def location(self, obj):
         return reverse("doc-page", args=[obj])

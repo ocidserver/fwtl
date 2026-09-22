@@ -1,25 +1,22 @@
 # Menjalankan Dashboard 24 Jam (PC lokal + cloudflared)
 
-## 1. Jalankan web (gunicorn, port 8000)
+## 1. Jalankan web (satu perintah)
 
 ```bash
 cd /home/ocid/Code/cachyrepo/web
-SECRET_KEY="<isi-random-panjang>" \
-DEBUG=0 \
-ALLOWED_HOSTS="domain-kamu,localhost,127.0.0.1" \
-CSRF_TRUSTED_ORIGINS="https://domain-kamu" \
-BEHIND_CLOUDFLARE=1 \
-../.venv/bin/gunicorn config.wsgi:application \
-  --bind 127.0.0.1:8000 --workers 3 --daemon \
-  --pid /tmp/opencode/dashboard.pid --log-file /tmp/opencode/dashboard.log
+./start.sh
 ```
 
+`start.sh` mengurus: secret key (`~/.config/fwtl/secret_key`, dibuat sekali),
+migrasi, `collectstatic`, lalu gunicorn daemon di `127.0.0.1:8000`.
 Cek: `curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8000/`
 Berhenti: `kill $(cat /tmp/opencode/dashboard.pid)`
 
-Generate SECRET_KEY sekali saja:
+Untuk domain sendiri:
+
 ```bash
-../.venv/bin/python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+ALLOWED_HOSTS="domain-kamu,localhost,127.0.0.1" \
+CSRF_TRUSTED_ORIGINS="https://domain-kamu" ./start.sh
 ```
 
 ## 2. Tunnel via cloudflared (milikmu)

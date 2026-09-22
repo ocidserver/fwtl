@@ -148,7 +148,7 @@ def top_list(request):
                   {"votes": votes, "pop": pop, "dls": dls, "replaced": replaced})
 
 
-DOC_PAGES = ["install", "migrasi", "sumber-data", "faq"]
+DOC_PAGES = ["install", "migrasi", "sumber-data", "faq", "menjalankan"]
 
 
 def doc_page(request, slug):

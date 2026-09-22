@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-21 19:30+0700\n"
+"POT-Creation-Date: 2026-09-22 09:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,6 +114,7 @@ msgstr "Categories"
 
 #: catalog/templates/catalog/base_docs.html:188
 #: catalog/templates/catalog/base_docs.html:198
+#: catalog/templates/catalog/docs/menjalankan.html:3
 #: catalog/templates/catalog/home.html:61
 msgid "Dokumentasi"
 msgstr "Documentation"
@@ -203,6 +204,28 @@ msgid ""
 "Setiap halaman aplikasi menampilkan perintah install yang tepat untuk ketiga "
 "sumber di atas."
 msgstr ""
+
+#: catalog/templates/catalog/docs/menjalankan.html:2
+#: catalog/templates/catalog/docs/menjalankan.html:4
+#: catalog/templates/catalog/docs/menjalankan.html:5
+msgid "Menjalankan Server"
+msgstr "Running the Server"
+
+#: catalog/templates/catalog/docs/menjalankan.html:9
+msgid ""
+"Satu perintah di atas mengurus semuanya: secret key, migrasi, static files, "
+"lalu gunicorn di 127.0.0.1:8000."
+msgstr ""
+
+#: catalog/templates/catalog/docs/menjalankan.html:14
+msgid ""
+"Untuk domain sendiri, isi ALLOWED_HOSTS dan CSRF_TRUSTED_ORIGINS sebelum "
+"start:"
+msgstr ""
+
+#: catalog/templates/catalog/docs/menjalankan.html:18
+msgid "Matikan web dulu (SQLite terkunci saat tulis), lalu:"
+msgstr "Stop the web server first (SQLite locks on write), then:"
 
 #: catalog/templates/catalog/docs/migrasi.html:2
 #: catalog/templates/catalog/docs/migrasi.html:3
