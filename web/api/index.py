@@ -1,8 +1,8 @@
-"""Vercel serverless entrypoint untuk Django (FWTL)."""
+"""Vercel serverless entrypoint untuk Django (FWTL). File ini di web/api/."""
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "web"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 from django.core.wsgi import get_wsgi_application
