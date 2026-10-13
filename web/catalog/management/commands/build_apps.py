@@ -39,10 +39,11 @@ class Command(BaseCommand):
         parser.add_argument("--batch-size", type=int, default=2000)
 
     def handle(self, *args, **opts):
-        rules, cat_by_slug = defaultdict(list), {}
+        rules = defaultdict(list)
         for cr in CategoryRule.objects.select_related("category"):
             rules[cr.category.slug].append(cr.keyword)
-            cat_by_slug[cr.category.slug] = cr.category.id
+        # Semua kategori agar fallback 'other' tak terbuang
+        cat_by_slug = {c.slug: c.id for c in Category.objects.all()}
         self.stdout.write(f"rules: {sum(len(v) for v in rules.values())} keyword / {len(rules)} kategori")
 
         self.stdout.write("Memuat RawPackage...")
@@ -72,7 +73,9 @@ class Command(BaseCommand):
                 self.stdout.write(f"  {count} raw, {len(groups)} grup")
         self.stdout.write(f"total {count} raw -> {len(groups)} grup kanonis")
 
-        used_slugs = set(App.objects.values_list("slug", flat=True))
+        # Link-only: tiru kondisi build awal (used kosong) agar mapping slug identik.
+        # Jika di-seed dari DB, semua slug dianggap tabrakan dan mapping bergeser total.
+        used_slugs = set() if opts["link_only"] else set(App.objects.values_list("slug", flat=True))
         to_create, key2slug, key2cats = [], {}, {}
         for key, g in groups.items():
             text = f"{key} {' '.join(g['names'])} {' '.join(g['descs'][:3])}".lower()

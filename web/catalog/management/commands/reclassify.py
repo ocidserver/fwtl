@@ -39,7 +39,8 @@ class Command(BaseCommand):
         rules, cat_by_slug = defaultdict(list), {}
         for cr in CategoryRule.objects.select_related("category"):
             rules[cr.category.slug].append(cr.keyword.lower())
-            cat_by_slug[cr.category.slug] = cr.category.id
+        # Semua kategori (termasuk 'other' yg tak punya rule) agar fallback tak terbuang
+        cat_by_slug = {c.slug: c.id for c in Category.objects.all()}
         matchers = {s: compile_matcher(kws) for s, kws in rules.items()}
         lib_id = cat_by_slug.get("libraries-dependencies")
         sys_id = cat_by_slug.get("system-utilities")
