@@ -160,12 +160,8 @@ body.light .hero::after{background:radial-gradient(closest-side,rgba(34,211,238,
 <div class="hdr-right">
 <a class="iconbtn" href="https://github.com/CachyOS/CachyOS-PKGBUILDS" target="_blank" rel="noreferrer" title="GitHub">⌥ GitHub</a>
 <button class="iconbtn" id="themeBtn" title="dark/light">◐</button>
-<form action="{% url 'set_language' %}" method="post" style="margin:0">{% csrf_token %}
-<input type="hidden" name="next" value="{{ request.path }}">
-<select name="language" onchange="this.form.submit()">
-<option value="id" {% if LANG == "id" %}selected{% endif %}>ID</option>
-<option value="en" {% if LANG == "en" %}selected{% endif %}>EN</option>
-</select></form>
+<a class="iconbtn" href="{% url 'switch-lang' 'id' %}?next={{ request.path }}" title="Indonesia">ID</a> |
+<a class="iconbtn" href="{% url 'switch-lang' 'en' %}?next={{ request.path }}" title="English">EN</a>
 </div>
 </div>
 </header>

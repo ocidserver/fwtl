@@ -1,8 +1,12 @@
 from django.contrib.admin.views.decorators import staff_member_required
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import get_language
+from django.utils import translation
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import cache_control
 from .models import Alternative, App, Category, RawPackage, SubCategory, SyncLog, WindowsApp
 from django.contrib.auth.models import User
@@ -14,6 +18,19 @@ def _lang():
 
 def _cat_name(c, lang):
     return c.name_id if lang == "id" else c.name_en
+
+
+def switch_lang(request, code):
+    """Ganti bahasa via GET (tanpa CSRF) agar halaman publik bebas cookie/CSRF."""
+    if code not in dict(settings.LANGUAGES):
+        code = settings.LANGUAGE_CODE
+    nxt = request.GET.get("next", "/")
+    if not url_has_allowed_host_and_scheme(nxt, allowed_hosts={request.get_host()}):
+        nxt = "/"
+    translation.activate(code)
+    resp = HttpResponseRedirect(nxt)
+    resp.set_cookie(settings.LANGUAGE_COOKIE_NAME, code, max_age=31536000)
+    return resp
 
 
 @cache_control(max_age=300, s_maxage=3600)
@@ -171,7 +188,6 @@ def doc_page(request, slug):
 
 @staff_member_required
 def manage_dashboard(request):
-    from django.db.models import Count, Q
     stats = {
         "apps": App.objects.count(),
         "gui": App.objects.filter(is_gui=True).count(),
