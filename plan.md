@@ -65,13 +65,14 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Produksi lokal: gunicorn + WhiteNoise + `collectstatic` OK, flag `BEHIND_CLOUDFLARE`, baca `RUN.md`
 - [x] `sync_flathub_stats` (installs_total → extra.downloads) — SELESAI: 3.325/3.327 app (Firefox 12,2 jt, Chrome 12,1 jt)
 
-## Fase 5 — Polish & deploy [SEBAGIAN]
+## Fase 5 — Polish & deploy [SELESAI]
 - [x] GitHub: `github.com/ocidserver/fwtl` (main)
 - [x] Supabase Postgres `fwtl` (ap-southeast-1) + `copydb` 552.884 row + `DATABASE_URL`
-- [x] Vercel production: deteksi Django native (tanpa api/), maxDuration 60, WhiteNoise manifest — LIVE + verifikasi halaman
-- [ ] Backup DB, alert sync gagal
-- [ ] API read-only `/api/`, cache halaman populer
-- [ ] Dokumentasi: gabung 3 README lama jadi `docs/`
+- [x] Vercel production: deteksi Django native, region sin1 (dekat DB), maxDuration 60 — LIVE
+- [x] Cache CDN: `s-maxage=3600` halaman baca + API, `max-age=300` browser
+- [x] API read-only `/api/` (apps, app detail, categories, windows, top) + `/docs/api/`
+- [x] Backup: `dbbackup` (JSONL.gz per tabel) + SQLite `cp`; alert: `check_sync` + `/manage/`
+- [x] Dokumentasi: `docs/` riset (3 file) + halaman `/docs/*` (+api, menjalankan)
 
 ## Keputusan yang sudah diambil
 - Django (bukan Flask) — butuh admin kurasi + SEO pages cepat

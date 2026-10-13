@@ -33,7 +33,7 @@ class DocSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        return ["install", "migrasi", "sumber-data", "faq", "menjalankan"]
+        return ["install", "migrasi", "sumber-data", "faq", "menjalankan", "api"]
 
     def location(self, obj):
         return reverse("doc-page", args=[obj])
@@ -49,6 +49,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
+    path("", include("catalog.api_urls")),
 ]
 
 urlpatterns += i18n_patterns(

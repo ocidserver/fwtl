@@ -1,0 +1,21 @@
+{% extends "catalog/base_docs.html" %}{% load i18n %}
+{% block title %}API — {{ block.super }}{% endblock %}
+{% block crumb %}{% trans "Dokumentasi" %}{% endblock %}
+{% block crumb2 %}API{% endblock %}
+{% block doctitle %}🔌 API{% endblock %}
+{% block docsub %}<p class="sub">{% trans "Read-only JSON, tanpa token. Cocok untuk riset dan integrasi." %}</p>{% endblock %}
+{% block content %}
+<h2 id="endpoint">Endpoint</h2>
+<table>
+<tr><th>URL</th><th>{% trans "Isi" %}</th></tr>
+<tr><td><code class="inline">GET /api/apps/?q=&cat=&page=</code></td><td>{% trans "Daftar aplikasi + install + votes/downloads" %}</td></tr>
+<tr><td><code class="inline">GET /api/apps/&lt;slug&gt;/</code></td><td>{% trans "Detail aplikasi + paket per sumber" %}</td></tr>
+<tr><td><code class="inline">GET /api/categories/</code></td><td>{% trans "Kategori + subkategori + jumlah" %}</td></tr>
+<tr><td><code class="inline">GET /api/windows/?q=&page=</code></td><td>{% trans "Windows app + alternatif kurasi" %}</td></tr>
+<tr><td><code class="inline">GET /api/top/</code></td><td>{% trans "Top by votes & downloads" %}</td></tr>
+</table>
+<h2 id="contoh">{% trans "Contoh" %}</h2>
+<div class="codeblock"><div class="chead">bash</div><code class="install">curl "https://fwtl-alatdonlot-2677s-projects.vercel.app/api/apps/?q=firefox"
+curl "https://fwtl-alatdonlot-2677s-projects.vercel.app/api/windows/?q=photoshop"</code></div>
+<p>{% trans "Respons di-cache CDN 1 jam; halaman HTML 5 menit browser." %}</p>
+{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-22 09:45+0700\n"
+"POT-Creation-Date: 2026-10-13 12:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,6 +114,7 @@ msgstr "Categories"
 
 #: catalog/templates/catalog/base_docs.html:188
 #: catalog/templates/catalog/base_docs.html:198
+#: catalog/templates/catalog/docs/api.html:3
 #: catalog/templates/catalog/docs/menjalankan.html:3
 #: catalog/templates/catalog/home.html:61
 msgid "Dokumentasi"
@@ -150,6 +151,46 @@ msgstr "None yet."
 #: catalog/templates/catalog/home.html:48
 msgid "aplikasi"
 msgstr "apps"
+
+#: catalog/templates/catalog/docs/api.html:6
+msgid "Read-only JSON, tanpa token. Cocok untuk riset dan integrasi."
+msgstr "Read-only JSON, no token. For research and integrations."
+
+#: catalog/templates/catalog/docs/api.html:10
+msgid "Isi"
+msgstr "Contents"
+
+#: catalog/templates/catalog/docs/api.html:11
+msgid "Daftar aplikasi + install + votes/downloads"
+msgstr "App list + install + votes/downloads"
+
+#: catalog/templates/catalog/docs/api.html:12
+#, fuzzy
+#| msgid "Paket per sumber"
+msgid "Detail aplikasi + paket per sumber"
+msgstr "Packages per source"
+
+#: catalog/templates/catalog/docs/api.html:13
+msgid "Kategori + subkategori + jumlah"
+msgstr "Categories + subcategories + counts"
+
+#: catalog/templates/catalog/docs/api.html:14
+#, fuzzy
+#| msgid "alternatif"
+msgid "Windows app + alternatif kurasi"
+msgstr "alternatives"
+
+#: catalog/templates/catalog/docs/api.html:15
+msgid "Top by votes & downloads"
+msgstr "Top by votes & downloads"
+
+#: catalog/templates/catalog/docs/api.html:17
+msgid "Contoh"
+msgstr "Example"
+
+#: catalog/templates/catalog/docs/api.html:20
+msgid "Respons di-cache CDN 1 jam; halaman HTML 5 menit browser."
+msgstr "Responses cached on CDN for 1 hour; HTML pages 5 minutes in browser."
 
 #: catalog/templates/catalog/docs/faq.html:7
 #, fuzzy

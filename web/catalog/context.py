@@ -8,6 +8,7 @@ DOCS = [
     ("sumber-data", "Sumber Data", "Data Sources"),
     ("faq", "FAQ", "FAQ"),
     ("menjalankan", "Menjalankan Server", "Running the Server"),
+    ("api", "API", "API"),
 ]
 
 

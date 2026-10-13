@@ -26,4 +26,11 @@ CSRF_TRUSTED_ORIGINS="https://domain-kamu" ./start.sh</code>
 .venv/bin/python web/manage.py seed_windows</code>
 <h2 id="backup">Backup</h2>
 <code class="install">cp web/db.sqlite3 backup/db-$(date +%F).sqlite3</code>
+<p>{% trans "Untuk Postgres/Supabase:" %}</p>
+<code class="install">DATABASE_URL='...' .venv/bin/python web/manage.py dbbackup --dest ~/backup/fwtl</code>
+<h2 id="alert">Alert sync</h2>
+<code class="install">.venv/bin/python web/manage.py check_sync</code>
+<p>{% trans "Exit 1 bila ada sync gagal dalam 7 hari terakhir. Lihat juga /manage/." %}</p>
+<h2 id="api">API</h2>
+<p>{% trans "Dokumentasi API read-only:" %} <a href="/docs/api/">/docs/api/</a></p>
 {% endblock %}

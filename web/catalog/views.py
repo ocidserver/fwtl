@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import get_language
+from django.views.decorators.cache import cache_control
 from .models import Alternative, App, Category, RawPackage, SubCategory, SyncLog, WindowsApp
 from django.contrib.auth.models import User
 
@@ -15,6 +16,7 @@ def _cat_name(c, lang):
     return c.name_id if lang == "id" else c.name_en
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def home(request):
     lang = _lang()
     q = request.GET.get("q", "").strip()
@@ -37,6 +39,7 @@ def home(request):
     })
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def app_list(request):
     lang = _lang()
     q = request.GET.get("q", "").strip()
@@ -55,6 +58,7 @@ def app_list(request):
                   {"page": page, "q": q, "cats": cats, "cat": cat})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def app_detail(request, slug):
     lang = _lang()
     app = get_object_or_404(App.objects.prefetch_related("categories", "packages"), slug=slug)
@@ -85,6 +89,7 @@ def app_detail(request, slug):
                   {"app": app, "pkgs": pkgs, "alts": alts, **info})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def category_list(request):
     lang = _lang()
     cats = (Category.objects.annotate(n=Count("apps", filter=Q(apps__is_gui=True)))
@@ -92,6 +97,7 @@ def category_list(request):
     return render(request, "catalog/category_list.html", {"cats": cats})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def category_detail(request, slug):
     cat = get_object_or_404(Category, slug=slug)
     subs = (cat.subs.annotate(n=Count("apps", filter=Q(apps__is_gui=True)))
@@ -104,6 +110,7 @@ def category_detail(request, slug):
                   {"cat": cat, "subs": subs, "wins": wins})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def subcategory_detail(request, cat_slug, sub_slug):
     cat = get_object_or_404(Category, slug=cat_slug)
     sub = get_object_or_404(SubCategory, slug=f"{cat_slug}--{sub_slug}", category=cat)
@@ -113,6 +120,7 @@ def subcategory_detail(request, cat_slug, sub_slug):
                   {"cat": cat, "sub": sub, "page": page})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def windows_list(request):
     q = request.GET.get("q", "").strip()
     qs = WindowsApp.objects.order_by("name")
@@ -124,6 +132,7 @@ def windows_list(request):
     return render(request, "catalog/windows_list.html", {"page": page, "q": q})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def windows_detail(request, slug):
     lang = _lang()
     win = get_object_or_404(WindowsApp.objects.select_related("category"), slug=slug)
@@ -133,6 +142,7 @@ def windows_detail(request, slug):
     return render(request, "catalog/windows_detail.html", {"win": win, "alts": alts})
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def top_list(request):
     votes = (RawPackage.objects.filter(source="aur", extra__votes__gt=0)
              .select_related("app").order_by("-extra__votes")[:20])
@@ -148,9 +158,10 @@ def top_list(request):
                   {"votes": votes, "pop": pop, "dls": dls, "replaced": replaced})
 
 
-DOC_PAGES = ["install", "migrasi", "sumber-data", "faq", "menjalankan"]
+DOC_PAGES = ["install", "migrasi", "sumber-data", "faq", "menjalankan", "api"]
 
 
+@cache_control(max_age=300, s_maxage=3600)
 def doc_page(request, slug):
     if slug not in DOC_PAGES:
         from django.http import Http404
