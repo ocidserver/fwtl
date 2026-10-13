@@ -65,8 +65,11 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] Produksi lokal: gunicorn + WhiteNoise + `collectstatic` OK, flag `BEHIND_CLOUDFLARE`, baca `RUN.md`
 - [x] `sync_flathub_stats` (installs_total → extra.downloads) — SELESAI: 3.325/3.327 app (Firefox 12,2 jt, Chrome 12,1 jt)
 
-## Fase 5 — Polish & deploy
-- [ ] Dockerfile + deploy (Fly.io/Render/VPS), backup DB, alert sync gagal
+## Fase 5 — Polish & deploy [SEBAGIAN]
+- [x] GitHub: `github.com/ocidserver/fwtl` (main)
+- [x] Supabase Postgres `fwtl` (ap-southeast-1) + `copydb` 552.884 row + `DATABASE_URL`
+- [x] Vercel production: deteksi Django native (tanpa api/), maxDuration 60, WhiteNoise manifest — LIVE + verifikasi halaman
+- [ ] Backup DB, alert sync gagal
 - [ ] API read-only `/api/`, cache halaman populer
 - [ ] Dokumentasi: gabung 3 README lama jadi `docs/`
 
