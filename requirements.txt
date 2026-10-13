@@ -1,0 +1,2 @@
+# Root requirements utk Vercel (auto-install). Dependensi aktual di web/requirements.txt
+-r web/requirements.txt

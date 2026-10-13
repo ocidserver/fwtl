@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pip install -r web/requirements.txt && python web/manage.py collectstatic --noinput",
+  "buildCommand": "python web/manage.py collectstatic --noinput",
   "rewrites": [{ "source": "/(.*)", "destination": "/api/index.py" }]
 }
