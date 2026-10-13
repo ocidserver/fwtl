@@ -40,7 +40,7 @@ SEO-friendly, cocok untuk solo dev; lihat diskusi sebelumnya).
 - [x] `manage.py sync_flathub` (daftar ID + detail per app via `/api/v2/appstream`, bulk upsert)
 - [x] Uji `--max-apps 5` OK (5/5 insert; total 3.327 aplikasi)
 - [x] Full sync (~3.327 app) — SELESAI: 3.327 total (3.322 insert + 5 update)
-**Total DB: 162.464 row (CachyOS 39.393 + AUR 119.744 + Flathub 3.327)**
+**Total DB: 165.842 row (CachyOS 39.711 + AUR 121.707 + Flathub 3.356 + uji) → 119.674 App, 165.842/165.842 tertaut, 0 tanpa kategori, 111 alternatives** (refresh Okt 2026; insiden: job mati 2x saat linking → recovery via wipe + `--link-only`; log persisten di `~/.local/share/fwtl/logs/`)
 - [ ] Scheduler mingguan (cron/celery-beat) + diff report
 
 ## Fase 2 — Normalisasi & pengelompokan [SELESAI + SUBKATEGORI]
