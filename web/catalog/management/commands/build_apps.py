@@ -33,6 +33,11 @@ def gui_flag(key: str, cats: set) -> bool:
 class Command(BaseCommand):
     help = "Bangun App kanonis lintas sumber + klasifikasi kategori + tandai is_gui"
 
+    def add_arguments(self, parser):
+        parser.add_argument("--link-only", action="store_true",
+                            help="Hanya tautkan RawPackage yang app-nya NULL (resume, aman diulang)")
+        parser.add_argument("--batch-size", type=int, default=2000)
+
     def handle(self, *args, **opts):
         rules, cat_by_slug = defaultdict(list), {}
         for cr in CategoryRule.objects.select_related("category"):
@@ -86,10 +91,38 @@ class Command(BaseCommand):
                 i += 1
                 slug = f"{base}-{i}"[:120]
             used_slugs.add(slug)
-            disp = (g["flat"] or g["best"])[:200]
-            to_create.append(App(slug=slug, display_name=disp, is_gui=gui_flag(key, matched)))
+            if not opts["link_only"]:
+                disp = (g["flat"] or g["best"])[:200]
+                to_create.append(App(slug=slug, display_name=disp, is_gui=gui_flag(key, matched)))
             key2slug[key] = slug
             key2cats[key] = matched
+
+        if opts["link_only"]:
+            id_by_slug = dict(App.objects.values_list("slug", "id"))
+            null_ids = set(RawPackage.objects.filter(app__isnull=True).values_list("id", flat=True))
+            self.stdout.write(f"resume: {len(null_ids)} RawPackage belum tertaut")
+            batch, done = [], 0
+            bs = opts["batch_size"]
+            for key, g in groups.items():
+                aid = id_by_slug.get(key2slug[key])
+                if aid is None:
+                    continue
+                for rid in g["ids"]:
+                    if rid not in null_ids:
+                        continue
+                    batch.append((aid, rid))
+                    if len(batch) >= bs:
+                        self._flush(batch)
+                        done += len(batch)
+                        batch = []
+                        if done % 20000 < bs:
+                            self.stdout.write(f"  {done} tertaut...")
+            if batch:
+                self._flush(batch)
+                done += len(batch)
+            left = RawPackage.objects.filter(app__isnull=True).count()
+            self.stdout.write(self.style.SUCCESS(f"selesai link-only: {done} ditautkan, sisa NULL: {left}"))
+            return
 
         App.objects.bulk_create(to_create, batch_size=1000)
         self.stdout.write(f"{len(to_create)} App dibuat")
