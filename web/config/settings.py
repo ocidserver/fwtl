@@ -82,10 +82,26 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Database — Postgres via env, fallback sqlite untuk dev cepat
+# Database — DATABASE_URL (Vercel/Supabase) > POSTGRES_* (compose) > sqlite (dev)
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if os.environ.get("POSTGRES_DB"):
+def _db_from_url(url):
+    from urllib.parse import urlparse, unquote
+    p = urlparse(url)
+    return {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": (p.path or "/postgres").lstrip("/"),
+        "USER": unquote(p.username or "postgres"),
+        "PASSWORD": unquote(p.password or ""),
+        "HOST": p.hostname or "localhost",
+        "PORT": str(p.port or 5432),
+        "CONN_MAX_AGE": 0,  # serverless: jangan tahan koneksi (pgbouncer)
+    }
+
+
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {"default": _db_from_url(os.environ["DATABASE_URL"])}
+elif os.environ.get("POSTGRES_DB"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",

@@ -17,3 +17,4 @@ media/
 
 # Riset lama tetap tracked agar ETL bisa di-port:
 # *.py, *.md, *.txt tetap ter-track
+fwtl-DB.md
